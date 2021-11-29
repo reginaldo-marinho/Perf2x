@@ -1,0 +1,26 @@
+<div class="text-center mt-1">
+    <h1>{{titulo}}</h1>
+</div>
+<div class="mt-4">
+<form >
+    <div class="d-flex">
+        <input  class="form-control" #filter placeholder="Digite aqui o que voce procura"  #texto  type="text"> 
+         <button type="button" class="btn bg-blue" style="margin-left: 5px;" (click)="GetLike(texto.value)"> Buscar</button>    
+    </div>
+</form>
+    <h2 class="add-conteudp" ><i [routerLink]="['/Form-conteudo']" routerLinkActive="router-link-active" class="bi bi-plus-lg"></i></h2>
+</div>
+<div class="conteudo-post mb-5">
+    <div *ngFor="let items of ListaConteudo">
+        <h5 class="text-left mt-4">{{items.titulo}}</h5>
+        <div *ngFor="let detalhe of items.conteudoDatalhes" class="apresentacao-conteudo">
+            {{detalhe.texto}}
+        </div>  
+        <div class="">
+            <div class="actions-conteudo">
+                <i class="bi bi-pencil-fill bg-blue cur-poi btn-manutencao fs-rem-1 ms-2" [routerLink]="['/Form-conteudo',items.codigo]" routerLinkActive="router-link-active"></i>
+                <i class="bi bi-trash bg-red cur-poi btn-manutencao fs-rem-1"  (click)="delete(items.codigo)"></i>
+            </div>
+        </div>
+    </div>  
+</div>

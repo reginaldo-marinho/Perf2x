@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css");
+.navbar-bg-green{
+    background-color: #44E663 !important;
+}
+
+.bg-green{
+    background-color: #44E663 !important;
+}
+.bg-yellow{
+    background-color: #e3d641!important;
+} 
+.bg-blue{
+    background-color: #4485e6!important;
+} 
+
+.bg-red{
+    background-color: #e64444!important;
+}
+
+.cur-poi{
+    cursor: pointer;
+}
+
+body{
+    font-family: Verdana, Arial, Helvetica, sans-serif !important;
+}
+
+.fs-rem-1{
+    font-size: 1rem;
+}
+.invalid-field-danger{
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    font-weight: bolder;
+}
+.color-red{
+    color: rgba(255, 0, 0, 0.651) !important;
+}

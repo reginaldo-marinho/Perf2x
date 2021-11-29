@@ -1,0 +1,15 @@
+.message-box,.message-box-end{
+    background-color: rgba(0, 174, 255, 0.5);
+    border-radius: 5px;
+    height: 50px;
+    font-size: 20px;
+}
+.message-box-end{
+    display: none;
+    transition:"opacity 0.8s";
+    opacity:"0";
+}
+.message-box{
+    display: block;
+    opacity: 100;
+}

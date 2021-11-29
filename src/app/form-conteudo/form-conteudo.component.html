@@ -1,0 +1,71 @@
+<div class="mt-4 mb-5">
+    <div>
+        <h1 class="text-center">Criando uma Nova História </h1>
+    </div>
+    <form  autocomplete="off"  [formGroup]="FormConteudo" #conteudo="ngForm"  *ngIf="conteudoHeader || !AlterarConteudo ">
+        
+        <div class="mb-3" *ngIf="!AlterarConteudo">
+            <label for="codigo" class="form-label">Codigo</label>
+            <input type="text"  class="form-control" formControlName='codigo' required>
+            <div *ngIf="this.FormConteudo.get('codigo')!.errors?.['required']">
+                <div class="invalid-field-danger color-red mt-1">
+                    Preenchimento do campo  é obrigatório
+                </div>    
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="tipo">Tipo do Conteudo</label>
+            <select  class="form-select" formControlName="nivelConteudo" >
+                <option *ngFor="let item of TipoConteudo" [value]="item.valor">{{item.nivel}}</option>
+            </select>
+            <div *ngIf="this.FormConteudo.get('nivelConteudo')!.errors?.['required']">
+                <div class="invalid-field-danger color-red mt-1">
+                    Preenchimento do campo  é obrigatório
+                </div>    
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="Titulo" class="form-label">Titulo</label>
+            <input type="text"  class="form-control"  formControlName='titulo' required>
+            <div *ngIf="this.FormConteudo.get('titulo')!.errors?.['required']">
+                <div class="invalid-field-danger color-red mt-1">
+                    Preenchimento do campo  é obrigatório
+                </div>    
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="Posicao" class="form-label">Posicao</label>
+            <input type="number" class="form-control" formControlName='posicao' required>
+            <div *ngIf="this.FormConteudo.get('posicao')!.errors?.['required']">
+                <div class="invalid-field-danger color-red mt-1">
+                    Preenchimento do campo  é obrigatório
+                </div>    
+            </div>
+        </div>
+        <div class="border rounded mb-3">
+           <div formArrayName="conteudoDatalhes">
+                <div *ngFor="let detalhe of conteudoDatalhes.controls; index as posicao">
+                    <div [formGroupName]="posicao">
+                        <div class="mb-3 me-1 ms-1">
+                            <label for="texto" class="form-label">texto</label>
+                            <textarea class="form-control" formControlName="texto" style="height: 300px;"></textarea>
+                        </div>
+                        <div class="mb-3 me-1 ms-1">
+                            <label for="formFile" class="form-label">Anexar arquivo</label>
+                            <input class="form-control"  name="imagem" type="file" formControlName="imagem">
+                        </div>                  
+                    </div> 
+                </div>
+            </div>
+            <div class="mb-3">
+                <h2><i class="bi bi-plus-lg" (click)="AddConteudoDetalhe(null)"></i></h2>
+            </div>
+        </div>
+        <button type="submit" class="btn bg-blue me-1" (click)="save(FormConteudo.value)"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>
+        <button type="submit" class="btn bg-blue me-1" (click)="update(FormConteudo.value)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}"> Alterar <i class="bi bi-pencil-fill"></i></button>
+        <button type="submit" class="btn bg-blue me-1" (click)="delete(conteudoHeader.codigo)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}" >Excluir <i class="bi bi-trash"></i></button> 
+        <a class="btn navbar-bg-green bg-yellow" [routerLink]="['/menu-brazukas']" routerLinkActive="router-link-active" >Voltar <i class="bi bi-arrow-left"></i></a>
+    </form>
+</div>
+<app-loader></app-loader>
+<message-box></message-box>

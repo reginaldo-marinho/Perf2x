@@ -1,0 +1,25 @@
+
+.add-conteudp{
+    float: right;
+}
+.apresentacao-conteudo{
+    max-height: 100px;
+    text-align: justify;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-indent: 40px;
+}
+
+.btn-manutencao{
+    border-radius: 100px;
+    padding: 2px 6px 2px 6px;
+    color: white;
+    float: right;
+}
+.actions-conteudo{
+    position: absolute;
+    margin-top: -25px;
+}
+.actions-conteudo{
+    right : 180px;
+}

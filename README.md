@@ -1,3 +1,2 @@
 # Perf2x
-Perfil Performático - Documente o que você aprendeu 
-sqqqqqqqqqqqqq
+Perfil Performático - Crie sua propria Documentação

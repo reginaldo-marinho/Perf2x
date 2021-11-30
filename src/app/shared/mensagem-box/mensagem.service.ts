@@ -1,4 +1,9 @@
-export interface Mensagem{
+import { Injectable } from "@angular/core";
+
+export interface IMensagem{
+  CriarMensagem():string;
+}
+export interface IMensagemNiveis{
   CriarMensagemSucesso():string;
   CriarMensagemAviso():string;
   CriarMensagemErro():string;
@@ -8,7 +13,11 @@ export class NiveisMensagem{
   protected ConstNivelAviso:string = "Aviso";
   protected ConstNivelErro: string = "Erro";
 }
-export class MensagensInsert extends NiveisMensagem implements Mensagem{
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ServiceMensagensInsert extends NiveisMensagem implements IMensagemNiveis,IMensagem{
     protected ConstFraseSucesso: string = "o registro foi salvo!";
     protected ConstFraseAviso: string = "registro pode não ter sido salvo corretamente";
     protected ConstFraseErro: string = "não foi possivel inserir o registro";
@@ -22,18 +31,7 @@ export class MensagensInsert extends NiveisMensagem implements Mensagem{
     CriarMensagemErro():string{
       return this.ConstNivelSucesso.concat(" - ",this.ConstFraseSucesso);
     }
-}
-export class MensagemBoxService{
-
-      CloseMessageBox(){
-        var msg = document.getElementById("messagebox")
-        msg?.classList.remove("message-box");
-        msg?.classList.add("message-box-end");
-      }
-  
-      OpenMessageBox(){
-        var msg = document.getElementById("messagebox");
-        msg?.classList.remove("message-box-end");
-        msg?.classList.add("message-box");
-      }
+    CriarMensagem():string{
+      return "";
+    }
 }

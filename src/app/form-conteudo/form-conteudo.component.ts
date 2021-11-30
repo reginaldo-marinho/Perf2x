@@ -6,7 +6,6 @@ import { LoaderService } from "../shared/Loader/loader.service";
 
 import { ConteudoDatalhes, ConteudoHeader } from "./conteudo-header";
 import { ConteudoService } from "./conteudo.service";
-
 @Component({
     selector: 'form-conteudo',
     templateUrl:'./form-conteudo.component.html',
@@ -41,7 +40,8 @@ export class FormConteudoComponent implements OnInit {
     conteudoDatalhes: this.fb.array([])
   })
 
-  constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService){  }
+  constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, 
+              private fb: FormBuilder, private louder: LoaderService){  }
   
   ngOnInit(){
     const id =  this.activatedRoute.snapshot.paramMap.get("codconteudo");

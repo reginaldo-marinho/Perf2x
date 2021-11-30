@@ -27,19 +27,4 @@ export class ServiceMensagensInsert extends NiveisMensagem implements IMensagemN
     }
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ServiceMensagem{
-  OpenMessageBox(){
-    var msg = document.getElementById("messagebox");
-    msg?.classList.remove("message-box-end");
-    msg?.classList.add("message-box");
-  }
-  CloseMessageBox(){
-    var msg = document.getElementById("messagebox")
-    msg?.classList.remove("message-box");
-    msg?.classList.add("message-box-end");
-  }
-}
 

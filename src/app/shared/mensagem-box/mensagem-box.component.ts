@@ -8,9 +8,17 @@ import { Component, Injectable } from "@angular/core";
     
 })
 
-@Injectable({
-    providedIn: 'root'
-  })
+
 export  class  MensagemBoxComponent {
     Mensagem?:string;
+    OpenMessageBox(){
+        var msg = document.getElementById("messagebox");
+        msg?.classList.remove("message-box-end");
+        msg?.classList.add("message-box");
+      }
+      CloseMessageBox(){
+        var msg = document.getElementById("messagebox")
+        msg?.classList.remove("message-box");
+        msg?.classList.add("message-box-end");
+      }
 }

@@ -112,8 +112,8 @@ TransferObsejectHeader(){
        this.conteudoService.saveConteudo(conteudo).subscribe(      
         {
           next:(conteudo:ConteudoHeader) => {
-            this.MensagemBoxComponent = new MensagemBoxComponent();
-            this.MensagemBoxComponent.Mensagem = new ServiceMensagensInsert().CriarMensagemSucesso(); 
+            this.MensagemBoxComponent!.Mensagem = new ServiceMensagensInsert().CriarMensagemSucesso();
+            this.MensagemBoxComponent!.OpenMessageBox();
           },
           error: err => console.log("Erro ao entar salvar conteudo",err)
         })

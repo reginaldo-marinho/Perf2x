@@ -1,33 +1,28 @@
 export interface Mensagem{
-  CriarMensagem():string;
+  CriarMensagemSucesso():string;
+  CriarMensagemAviso():string;
+  CriarMensagemErro():string;
 }
 export class NiveisMensagem{
-  protected ConstSucesso:string = "Sucesso";
-  protected ConstAviso:string = "Aviso";
-  protected ConstErro: string = "Erro";
+  protected ConstNivelSucesso:string = "Sucesso";
+  protected ConstNivelAviso:string = "Aviso";
+  protected ConstNivelErro: string = "Erro";
 }
-export class MensagensCRUD extends NiveisMensagem{
-  protected ConstFraseSucesso: string = "o registro foi salvo!";
-  protected ConstFraseAviso: string = "registro pode não ter sido salvo corretamente";
-  protected ConstFraseErro: string = "não foi possivel inserir o registro";
-}
+export class MensagensInsert extends NiveisMensagem implements Mensagem{
+    protected ConstFraseSucesso: string = "o registro foi salvo!";
+    protected ConstFraseAviso: string = "registro pode não ter sido salvo corretamente";
+    protected ConstFraseErro: string = "não foi possivel inserir o registro";
 
-export class MensagemSucesso extends MensagensCRUD implements Mensagem{
-  CriarMensagem(){
-    return this.ConstSucesso.concat(" - ", this.ConstFraseSucesso);
-  }
+    CriarMensagemSucesso():string{
+        return this.ConstNivelSucesso.concat(" - ",this.ConstFraseSucesso);
+    }
+    CriarMensagemAviso():string{
+      return this.ConstNivelSucesso.concat(" - ",this.ConstFraseSucesso);
+    }
+    CriarMensagemErro():string{
+      return this.ConstNivelSucesso.concat(" - ",this.ConstFraseSucesso);
+    }
 }
-export class MensagemAviso extends MensagensCRUD implements Mensagem{
-  CriarMensagem(){
-    return this.ConstAviso.concat(" - ", this.ConstFraseAviso);
-  }
-}
-export class MensagemErro extends MensagensCRUD implements Mensagem{
-  CriarMensagem(){
-    return this.ConstErro.concat(" - ", this.ConstFraseErro);
-  }
-}
-
 export class MensagemBoxService{
 
       CloseMessageBox(){

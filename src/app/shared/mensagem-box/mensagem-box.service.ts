@@ -6,7 +6,6 @@ export class NiveisMensagem{
   protected ConstAviso:string = "Aviso";
   protected ConstErro: string = "Erro";
 }
-
 export class MensagensCRUD extends NiveisMensagem{
   protected ConstFraseSucesso: string = "o registro foi salvo!";
   protected ConstFraseAviso: string = "registro pode não ter sido salvo corretamente";

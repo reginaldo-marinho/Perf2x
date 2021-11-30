@@ -4,7 +4,7 @@ import { ConteudoModule } from './form-conteudo/form-conteudo.module';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NavBarComponent } from './core/nav-bar/nav-bar.component';
 import { MenuBrazukasComponent } from './menu-conteudo/menu-brazukas.component';
 import { ListConteudoComponent } from './list-conteudo/list-conteudo.component';
 @NgModule({

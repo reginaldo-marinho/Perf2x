@@ -1,5 +1,5 @@
 import { FormConteudoComponent } from "./form-conteudo.component";
-import { MensagemBoxComponent } from "../mensagem-box/mensagem-box.component";
+import { MensagemBoxComponent } from "../shared/mensagem-box/mensagem-box.component";
 import { LoaderComponent } from "../shared/Loader/loader.component";
 
 

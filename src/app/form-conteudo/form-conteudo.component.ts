@@ -2,7 +2,7 @@
 import {  Component, Input, OnInit } from "@angular/core";
 import { FormGroup,FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { LoaderService } from "../Loader/loader.service";
+import { LoaderService } from "../shared/Loader/loader.service";
 
 import { ConteudoDatalhes, ConteudoHeader } from "./conteudo-header";
 import { ConteudoService } from "./conteudo.service";

@@ -1,8 +1,5 @@
 import { Injectable } from "@angular/core";
 
-export interface IMensagem{
-  CriarMensagem():string;
-}
 export interface IMensagemNiveis{
   CriarMensagemSucesso():string;
   CriarMensagemAviso():string;
@@ -17,7 +14,7 @@ export class NiveisMensagem{
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceMensagensInsert extends NiveisMensagem implements IMensagemNiveis,IMensagem{
+export class ServiceMensagensInsert extends NiveisMensagem implements IMensagemNiveis{
     protected ConstFraseSucesso: string = "o registro foi salvo!";
     protected ConstFraseAviso: string = "registro pode não ter sido salvo corretamente";
     protected ConstFraseErro: string = "não foi possivel inserir o registro";
@@ -30,8 +27,5 @@ export class ServiceMensagensInsert extends NiveisMensagem implements IMensagemN
     }
     CriarMensagemErro():string{
       return this.ConstNivelSucesso.concat(" - ",this.ConstFraseSucesso);
-    }
-    CriarMensagem():string{
-      return "";
     }
 }

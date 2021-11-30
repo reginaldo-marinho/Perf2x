@@ -15,7 +15,7 @@ export class MensagemBoxComponent {
         var msg = document.getElementById("messagebox");
         msg?.classList.remove("message-box-end");
         msg?.classList.add("message-box");
-        this.mensagem.CriarMensagem();
+        this.Mensagem = this.mensagem.CriarMensagemSucesso();
    }
 
     CloseMessageBox(){

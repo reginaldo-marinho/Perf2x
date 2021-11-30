@@ -6,6 +6,9 @@ import { LoaderService } from "../shared/Loader/loader.service";
 
 import { ConteudoDatalhes, ConteudoHeader } from "./conteudo-header";
 import { ConteudoService } from "./conteudo.service";
+import { MensagemBoxComponent } from "../shared/mensagem-box/mensagem-box.component";
+import { IMensagemNiveis } from "../shared/mensagem-box/mensagem.service";
+import { ServiceMensagensInsert } from "../shared/mensagem-box/mensagem.service";
 @Component({
     selector: 'form-conteudo',
     templateUrl:'./form-conteudo.component.html',
@@ -15,7 +18,9 @@ export class FormConteudoComponent implements OnInit {
 
   AlterarConteudo   : boolean = false;
   AddConteudoAlteracao : boolean = false;
-  Messagem : string = "Conteudo  salvo com sucesso!"
+  MensagemBoxComponent?: MensagemBoxComponent;
+  MesagemNivel?: IMensagemNiveis;
+  
 
   TipoConteudo = [{nivel:"Nivel H1",
                   valor:1},
@@ -107,7 +112,8 @@ TransferObsejectHeader(){
        this.conteudoService.saveConteudo(conteudo).subscribe(      
         {
           next:(conteudo:ConteudoHeader) => {
-            this.conteudoHeader;
+            this.MensagemBoxComponent = new MensagemBoxComponent();
+            this.MensagemBoxComponent.Mensagem = new ServiceMensagensInsert().CriarMensagemSucesso(); 
           },
           error: err => console.log("Erro ao entar salvar conteudo",err)
         })

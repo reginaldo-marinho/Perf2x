@@ -11,9 +11,6 @@ export class NiveisMensagem{
   protected ConstNivelErro: string = "Erro";
 }
 
-@Injectable({
-  providedIn: 'root'
-})
 export class ServiceMensagensInsert extends NiveisMensagem implements IMensagemNiveis{
     protected ConstFraseSucesso: string = "o registro foi salvo!";
     protected ConstFraseAviso: string = "registro pode não ter sido salvo corretamente";
@@ -29,3 +26,20 @@ export class ServiceMensagensInsert extends NiveisMensagem implements IMensagemN
       return this.ConstNivelSucesso.concat(" - ",this.ConstFraseSucesso);
     }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ServiceMensagem{
+  OpenMessageBox(){
+    var msg = document.getElementById("messagebox");
+    msg?.classList.remove("message-box-end");
+    msg?.classList.add("message-box");
+  }
+  CloseMessageBox(){
+    var msg = document.getElementById("messagebox")
+    msg?.classList.remove("message-box");
+    msg?.classList.add("message-box-end");
+  }
+}
+

@@ -115,7 +115,10 @@ TransferObsejectHeader(){
             this.MensagemBoxComponent!.Mensagem = new ServiceMensagensInsert().CriarMensagemSucesso();
             this.MensagemBoxComponent!.OpenMessageBox();
           },
-          error: err => console.log("Erro ao entar salvar conteudo",err)
+          error: err => {
+            this.MensagemBoxComponent!.Mensagem = new ServiceMensagensInsert().CriarMensagemErro();
+            this.MensagemBoxComponent!.OpenMessageBox();
+          }
         })
         this.louder.CloseLoader();
     }

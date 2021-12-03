@@ -1,5 +1,5 @@
 
-import { Component, Injectable } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
     selector:"message-box",

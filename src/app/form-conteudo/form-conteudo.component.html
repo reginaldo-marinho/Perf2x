@@ -53,7 +53,7 @@
                         </div>
                         <div class="mb-3 me-1 ms-1">
                             <label for="formFile" class="form-label">Anexar arquivo</label>
-                            <input class="form-control"  name="imagem" type="file" formControlName="imagem">
+                            <input class="form-control"  name="imagem" type="file" formControlName="imagem" (change)="UploadImagem($event)" #fileUpload>
                         </div>                  
                     </div> 
                 </div>
@@ -63,6 +63,7 @@
             </div>
         </div>
         <button type="submit" class="btn bg-blue me-1" (click)="save(FormConteudo.value)"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>
+        <button type="submit" class="btn bg-blue me-1"  >Upload <i class="bi bi-patch-plus"></i></button>
         <button type="submit" class="btn bg-blue me-1" (click)="update(FormConteudo.value)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}"> Alterar <i class="bi bi-pencil-fill"></i></button>
         <button type="submit" class="btn bg-blue me-1" (click)="delete(conteudoHeader.codigo)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}" >Excluir <i class="bi bi-trash"></i></button> 
         <a class="btn navbar-bg-green bg-yellow" [routerLink]="['/menu-brazukas']" routerLinkActive="router-link-active" >Voltar <i class="bi bi-arrow-left"></i></a>

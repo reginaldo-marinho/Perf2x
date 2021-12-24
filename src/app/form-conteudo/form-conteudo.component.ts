@@ -9,6 +9,9 @@ import { ConteudoService } from "./conteudo.service";
 import { MensagemBoxComponent } from "../shared/mensagem-box/mensagem-box.component";
 import { IMensagemNiveis } from "../shared/mensagem-box/mensagem.service";
 import { ServiceMensagensInsert } from "../shared/mensagem-box/mensagem.service";
+import {UploadArquivosService} from "../shared/upload-arquivos.service"
+
+
 @Component({
     selector: 'form-conteudo',
     templateUrl:'./form-conteudo.component.html',
@@ -20,7 +23,8 @@ export class FormConteudoComponent implements OnInit {
   AddConteudoAlteracao : boolean = false;
   MensagemBoxComponent?: MensagemBoxComponent;
   MesagemNivel?: IMensagemNiveis;
-  
+  selectedFiles?: FileList;
+  Currentfile!: File;
 
   TipoConteudo = [{nivel:"Nivel H1",
                   valor:1},
@@ -46,7 +50,7 @@ export class FormConteudoComponent implements OnInit {
   })
 
   constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, 
-              private fb: FormBuilder, private louder: LoaderService){  }
+              private fb: FormBuilder, private louder: LoaderService, private upload:UploadArquivosService){  }
   
   ngOnInit(){
     const id =  this.activatedRoute.snapshot.paramMap.get("codconteudo");
@@ -58,6 +62,10 @@ export class FormConteudoComponent implements OnInit {
 
   get conteudoDatalhes():FormArray{
      return this.FormConteudo.get('conteudoDatalhes') as FormArray 
+  }
+
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files;
   }
 
   AddConteudoDetalhe(detalhe: ConteudoDatalhes|any){
@@ -108,7 +116,6 @@ TransferObsejectHeader(){
         conteudo.conteudoDatalhes[Number(i)].codigo =conteudo.codigo
         conteudo.conteudoDatalhes[Number(i)].codigoHeader = conteudo.codigo
       }
-      
        this.conteudoService.saveConteudo(conteudo).subscribe(      
         {
           next:(conteudo:ConteudoHeader) => {
@@ -122,6 +129,20 @@ TransferObsejectHeader(){
         })
         this.louder.CloseLoader();
     }
+
+    UploadImagem(event: any) {
+
+      const file:File = event.target.files[0];
+
+        this.upload.UploadUmagem(file).subscribe(      
+         {
+           next:conteudo => {
+           },
+           error: err => {
+          }
+         })
+     }
+
 
     update(conteudo:any){
       conteudo.nivelConteudo = Number(conteudo.nivelConteudo) 

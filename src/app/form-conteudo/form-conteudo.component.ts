@@ -90,6 +90,9 @@ export class FormConteudoComponent implements OnInit {
     })
     return this.conteudoHeader;
   }
+  GetConteudoPai(texto:string){
+    this.ListConteudoHeader.find(con => con.titulo.search(`/${texto}/a`))
+  }
 
   CreateListConteudoHeader(){
     
@@ -108,8 +111,7 @@ TransferObsejectHeader(){
   this.FormConteudo.get('posicao')?.setValue(this.conteudoHeader.posicao)
 
   this.conteudoHeader.conteudoDatalhes!.forEach( cont => this.AddConteudoDetalhe(cont))
-}
-
+  }
 
   save(conteudo:ConteudoHeader) {
      this.louder.OpenLoader();

@@ -21,13 +21,12 @@ export class FormConteudoComponent implements OnInit {
   ngOnInit(){
       const id =  this.activatedRoute.snapshot.paramMap.get("codconteudo");
       if(id != null){
-       this.AlterarConteudo = true
-       this.GetConteudoById(id)
+          this.AlterarConteudo = true
+          this.GetConteudoById(id)
       }
       this.CreateListConteudoHeader();
   }
 
-    
   AlterarConteudo   : boolean = false;
   AddConteudoAlteracao : boolean = false;
   MensagemBoxComponent?: MensagemBoxComponent;

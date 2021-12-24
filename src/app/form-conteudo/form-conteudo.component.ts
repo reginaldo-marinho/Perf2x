@@ -25,6 +25,9 @@ export class FormConteudoComponent implements OnInit {
   MesagemNivel?: IMensagemNiveis;
   selectedFiles?: FileList;
   Currentfile!: File;
+  ListConteudoHeader!: ConteudoHeader[];
+
+  @Input() conteudoHeader!: ConteudoHeader;
 
   TipoConteudo = [{nivel:"Nivel H1",
                   valor:1},
@@ -38,8 +41,6 @@ export class FormConteudoComponent implements OnInit {
                   valor:5},
                   {nivel:"Nivel H6",
                   valor:6}]
-
-  @Input() conteudoHeader!: ConteudoHeader;
 
   FormConteudo = this.fb.group({
     codigo:  ['', Validators.required],
@@ -96,6 +97,16 @@ export class FormConteudoComponent implements OnInit {
       }
     })
     return this.conteudoHeader;
+  }
+
+  CreateListConteudoHeader(){
+    
+    this.conteudoService.getConteudoHeader().subscribe({
+      next:(conteudo)=> {
+         this.ListConteudoHeader! = conteudo;
+        },
+        error:()=> console.log("Erro ao tentar criar lista de ConteudoHeader")
+    });
   }
 
 TransferObsejectHeader(){

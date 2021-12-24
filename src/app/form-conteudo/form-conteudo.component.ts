@@ -1,5 +1,5 @@
 
-import {  Component, Input, OnInit } from "@angular/core";
+import {  Component, Input, OnChanges, OnInit } from "@angular/core";
 import { FormGroup,FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { LoaderService } from "../shared/Loader/loader.service";
@@ -14,9 +14,13 @@ import { ServiceMensagensInsert } from "../shared/mensagem-box/mensagem.service"
     templateUrl:'./form-conteudo.component.html',
     styleUrls:['./form-conteudo.component.css']
 })
-export class FormConteudoComponent implements OnInit {
+export class FormConteudoComponent implements OnInit, OnChanges {
 
   constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService){  }
+
+  ngOnChanges(){
+    
+  }
 
   ngOnInit(){
       const id =  this.activatedRoute.snapshot.paramMap.get("codconteudo");
@@ -35,6 +39,8 @@ export class FormConteudoComponent implements OnInit {
 
   @Input() conteudoHeader!: ConteudoHeader;
 
+  @Input() SelectTexto!:String;
+  
   TipoConteudo = [{nivel:"Nivel H1",
                   valor:1},
                   {nivel:"Nivel H2",
@@ -90,12 +96,13 @@ export class FormConteudoComponent implements OnInit {
     })
     return this.conteudoHeader;
   }
-  GetConteudoPai(texto:string){
-    this.ListConteudoHeader.find(con => con.titulo.search(`/${texto}/a`))
+  GetConteudoPai(event?:any){
+    let SubstringConteudoPai = event.target.value;
+    //utilizar expressões regulares
+    this.ListConteudoHeader.find(con => con.titulo.search(`/(${SubstringConteudoPai})/a`))
   }
 
   CreateListConteudoHeader(){
-    
     this.conteudoService.getConteudoHeader().subscribe({
       next:(conteudo)=> {
          this.ListConteudoHeader! = conteudo;

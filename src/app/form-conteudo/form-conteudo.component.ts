@@ -39,7 +39,7 @@ export class FormConteudoComponent implements OnInit {
                   {nivel:"Nivel H6",
                   valor:6}]
 
-  @Input()  conteudoHeader!: ConteudoHeader;
+  @Input() conteudoHeader!: ConteudoHeader;
 
   FormConteudo = this.fb.group({
     codigo:  ['', Validators.required],

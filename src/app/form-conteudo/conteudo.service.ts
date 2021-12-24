@@ -23,21 +23,18 @@ export class ConteudoService{
     getConteudoByText(texto :string):Observable<ConteudoHeader[]> {
         return this.http.get<ConteudoHeader[]>(`${this.configUrl}/buscar/${texto}` );
     }
+    getConteudoHeader():Observable<ConteudoHeader[]> {
+        return this.http.get<ConteudoHeader[]>(`${this.configUrl}/conteudoHeader/`);
+    }
     saveConteudo(coteudo: ConteudoHeader ): Observable<ConteudoHeader>{
         return this.http.post<ConteudoHeader>(this.configUrl,coteudo);
     }
-
     UpdateConteudo(coteudo: ConteudoHeader ): Observable<ConteudoHeader>{
         return this.http.put<ConteudoHeader>(`${this.configUrl}/${coteudo.codigo}`,coteudo);
     }
-
     deleteConteudo(id: number|string ): Observable<any>{
         return this.http.delete<any>( `${this.configUrl}/${id}`);
     }
-
-
-
-    
 }
 
 

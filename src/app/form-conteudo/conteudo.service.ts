@@ -10,9 +10,15 @@ import { ConteudoHeader } from "./conteudo-header";
 })
 export class ConteudoService{
     constructor (private http: HttpClient){}
-
     configUrl:string ='https://localhost:44331/api/ApiConteudo'
-    
+    TipoConteudo = [
+        {nivel:"Nivel H1",valor:1},
+        {nivel:"Nivel H2",valor:2},
+        {nivel:"Nivel H3",valor:3},
+        {nivel:"Nivel H4",valor:4},
+        {nivel:"Nivel H5",valor:5},
+        {nivel:"Nivel H6",valor:6}]
+
     getAllConteudo():Observable<ConteudoHeader[]> {
         return this.http.get<ConteudoHeader[]>(this.configUrl);
     }

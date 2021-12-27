@@ -7,14 +7,12 @@ import { LoaderService } from "../shared/Loader/loader.service";
 import { ConteudoDatalhes, ConteudoHeader } from "./conteudo-header";
 import { ConteudoService } from "./conteudo.service";
 @Component({
-    selector: 'form-conteudo',
     templateUrl:'./form-conteudo.component.html',
     styleUrls:['./form-conteudo.component.css']
 })
 export class FormConteudoComponent implements OnInit {
 
   constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService){  }
-
 
   ngOnInit(){
       const id =  this.activatedRoute.snapshot.paramMap.get("codconteudo");
@@ -27,28 +25,17 @@ export class FormConteudoComponent implements OnInit {
 
   AlterarConteudo   : boolean = false;
   AddConteudoAlteracao : boolean = false;
-  
+  NivelTituloConteudo = this.conteudoService.NivelTituloConteudo;
+
   ListConteudoHeader!: ConteudoHeader[];
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
   @Input() conteudoHeader!: ConteudoHeader;
- 
-  TipoConteudo = [{nivel:"Nivel H1",
-                  valor:1},
-                  {nivel:"Nivel H2",
-                  valor:2},
-                  {nivel:"Nivel H3",
-                  valor:3},
-                  {nivel:"Nivel H4",
-                  valor:4},
-                  {nivel:"Nivel H5",
-                  valor:5},
-                  {nivel:"Nivel H6",
-                  valor:6}]
 
   FormConteudo = this.fb.group({
     codigo:  ['', Validators.required],
     nivelConteudo:['', Validators.required],
+    conteudoPai:  [''],
     titulo:  ['', Validators.required],
     posicao: ['', Validators.required],
     conteudoDatalhes: this.fb.array([])
@@ -75,7 +62,6 @@ export class FormConteudoComponent implements OnInit {
         imagem: ['']
       })
     }
-   
     this.conteudoDatalhes.push(DetalheGroup!);
   }
 
@@ -91,9 +77,7 @@ export class FormConteudoComponent implements OnInit {
   GetConteudoPai(event?:any){
     this.TextoParaFiltrar = event.target.value;
     this.ConteudoHeaderEncontrado = this.ListConteudoHeader.find(con => con.titulo.toLocaleUpperCase().indexOf(this.TextoParaFiltrar.toUpperCase()) > -1);
-    alert(this.ConteudoHeaderEncontrado?.titulo)
   }
-
 
   CreateListConteudoHeader(){
     this.conteudoService.getConteudoHeader().subscribe({
@@ -109,7 +93,6 @@ TransferObsejectHeader(){
   this.FormConteudo.get('nivelConteudo')?.setValue(this.conteudoHeader.nivelConteudo)
   this.FormConteudo.get('titulo')?.setValue(this.conteudoHeader.titulo)
   this.FormConteudo.get('posicao')?.setValue(this.conteudoHeader.posicao)
-
   this.conteudoHeader.conteudoDatalhes!.forEach( cont => this.AddConteudoDetalhe(cont))
   }
 

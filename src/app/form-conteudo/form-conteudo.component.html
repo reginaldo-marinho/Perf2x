@@ -17,7 +17,7 @@
         <div class="mb-3">
             <label for="tipo">Tipo do Conteudo</label>
             <select  class="form-select" formControlName="nivelConteudo" >
-                <option *ngFor="let item of TipoConteudo" [value]="item.valor">{{item.nivel}}</option>
+                <option *ngFor="let item of NivelTituloConteudo" [value]="item.valor">{{item.nivel}}</option>
             </select>
             <div *ngIf="this.FormConteudo.get('nivelConteudo')!.errors?.['required']">
                 <div class="invalid-field-danger color-red mt-1">
@@ -28,7 +28,7 @@
         <div>
             <div class="mb-3">
                 <label for="tipo">Conteudo Pai</label>
-                <input type="text"  (keyup)="GetConteudoPai($event)" class="form-control"  name="" id="">
+                <input type="text"  (keyup)="GetConteudoPai($event)" class="form-control" formControlName="conteudoPai">
             </div>    
         </div>
 

@@ -11,7 +11,7 @@ import { ConteudoHeader } from "./conteudo-header";
 export class ConteudoService{
     constructor (private http: HttpClient){}
     configUrl:string ='https://localhost:44331/api/ApiConteudo'
-    TipoConteudo = [
+    NivelTituloConteudo = [
         {nivel:"Nivel H1",valor:1},
         {nivel:"Nivel H2",valor:2},
         {nivel:"Nivel H3",valor:3},

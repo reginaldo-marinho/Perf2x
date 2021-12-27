@@ -30,6 +30,7 @@ export class FormConteudoComponent implements OnInit {
   ListConteudoHeader!: ConteudoHeader[];
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
+
   @Input() conteudoHeader!: ConteudoHeader;
 
   FormConteudo = this.fb.group({
@@ -41,7 +42,6 @@ export class FormConteudoComponent implements OnInit {
     conteudoDatalhes: this.fb.array([])
   })
   
- 
   get conteudoDatalhes():FormArray{
      return this.FormConteudo.get('conteudoDatalhes') as FormArray 
   }
@@ -74,9 +74,19 @@ export class FormConteudoComponent implements OnInit {
     })
     return this.conteudoHeader;
   }
+
+  TransferObsejectHeader(){
+    this.FormConteudo.get('codigo')?.setValue(this.conteudoHeader.codigo)
+    this.FormConteudo.get('nivelConteudo')?.setValue(this.conteudoHeader.nivelConteudo)
+    this.FormConteudo.get('titulo')?.setValue(this.conteudoHeader.titulo)
+    this.FormConteudo.get('posicao')?.setValue(this.conteudoHeader.posicao)
+    this.conteudoHeader.conteudoDatalhes!.forEach( cont => this.AddConteudoDetalhe(cont))
+  }
+
   GetConteudoPai(event?:any){
     this.TextoParaFiltrar = event.target.value;
     this.ConteudoHeaderEncontrado = this.ListConteudoHeader.find(con => con.titulo.toLocaleUpperCase().indexOf(this.TextoParaFiltrar.toUpperCase()) > -1);
+    this.FormConteudo.get('conteudoPai')?.setValue(this.ConteudoHeaderEncontrado?.titulo)
   }
 
   CreateListConteudoHeader(){
@@ -88,13 +98,7 @@ export class FormConteudoComponent implements OnInit {
     });
   }
 
-TransferObsejectHeader(){
-  this.FormConteudo.get('codigo')?.setValue(this.conteudoHeader.codigo)
-  this.FormConteudo.get('nivelConteudo')?.setValue(this.conteudoHeader.nivelConteudo)
-  this.FormConteudo.get('titulo')?.setValue(this.conteudoHeader.titulo)
-  this.FormConteudo.get('posicao')?.setValue(this.conteudoHeader.posicao)
-  this.conteudoHeader.conteudoDatalhes!.forEach( cont => this.AddConteudoDetalhe(cont))
-  }
+
 
   save(conteudo:ConteudoHeader) {
      this.louder.OpenLoader();

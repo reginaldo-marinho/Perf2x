@@ -90,7 +90,7 @@ export class FormConteudoComponent implements OnInit {
   }
   GetConteudoPai(event?:any){
     this.TextoParaFiltrar = event.target.value;
-    this.ConteudoHeaderEncontrado = this.ListConteudoHeader.find(con => con.titulo.toLocaleLowerCase().indexOf(this.TextoParaFiltrar.toUpperCase()) > -1);
+    this.ConteudoHeaderEncontrado = this.ListConteudoHeader.find(con => con.titulo.toLocaleUpperCase().indexOf(this.TextoParaFiltrar.toUpperCase()) > -1);
     alert(this.ConteudoHeaderEncontrado?.titulo)
   }
 

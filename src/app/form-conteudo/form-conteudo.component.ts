@@ -1,26 +1,20 @@
 
-import {  Component, Input, OnChanges, OnInit } from "@angular/core";
+import {  Component, Input, OnInit } from "@angular/core";
 import { FormGroup,FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { LoaderService } from "../shared/Loader/loader.service";
 
 import { ConteudoDatalhes, ConteudoHeader } from "./conteudo-header";
 import { ConteudoService } from "./conteudo.service";
-import { MensagemBoxComponent } from "../shared/mensagem-box/mensagem-box.component";
-import { IMensagemNiveis } from "../shared/mensagem-box/mensagem.service";
-import { ServiceMensagensInsert } from "../shared/mensagem-box/mensagem.service";
 @Component({
     selector: 'form-conteudo',
     templateUrl:'./form-conteudo.component.html',
     styleUrls:['./form-conteudo.component.css']
 })
-export class FormConteudoComponent implements OnInit, OnChanges {
+export class FormConteudoComponent implements OnInit {
 
   constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService){  }
 
-  ngOnChanges(){
-    
-  }
 
   ngOnInit(){
       const id =  this.activatedRoute.snapshot.paramMap.get("codconteudo");
@@ -33,14 +27,12 @@ export class FormConteudoComponent implements OnInit, OnChanges {
 
   AlterarConteudo   : boolean = false;
   AddConteudoAlteracao : boolean = false;
-  MensagemBoxComponent?: MensagemBoxComponent;
-  MesagemNivel?: IMensagemNiveis;
-  ListConteudoHeader!: ConteudoHeader[];
-
-  @Input() conteudoHeader!: ConteudoHeader;
-
-  @Input() SelectTexto!:String;
   
+  ListConteudoHeader!: ConteudoHeader[];
+  ConteudoHeaderEncontrado?: ConteudoHeader;
+  TextoParaFiltrar!: string;
+  @Input() conteudoHeader!: ConteudoHeader;
+ 
   TipoConteudo = [{nivel:"Nivel H1",
                   valor:1},
                   {nivel:"Nivel H2",
@@ -91,16 +83,17 @@ export class FormConteudoComponent implements OnInit, OnChanges {
     this.conteudoService.getConteudoById(id).subscribe({
       next:(conteudo)=> {
          this.conteudoHeader = conteudo
-         this.TransferObsejectHeader()
+         this.TransferObsejectHeader();
       }
     })
     return this.conteudoHeader;
   }
   GetConteudoPai(event?:any){
-    let SubstringConteudoPai = event.target.value;
-    //utilizar expressões regulares
-    this.ListConteudoHeader.find(con => con.titulo.search(`/(${SubstringConteudoPai})/a`))
+    this.TextoParaFiltrar = event.target.value;
+    this.ConteudoHeaderEncontrado = this.ListConteudoHeader.find(con => con.titulo.toLocaleLowerCase().indexOf(this.TextoParaFiltrar.toUpperCase()) > -1);
+    alert(this.ConteudoHeaderEncontrado?.titulo)
   }
+
 
   CreateListConteudoHeader(){
     this.conteudoService.getConteudoHeader().subscribe({
@@ -131,12 +124,12 @@ TransferObsejectHeader(){
        this.conteudoService.saveConteudo(conteudo).subscribe(      
         {
           next:(conteudo:ConteudoHeader) => {
-            this.MensagemBoxComponent!.Mensagem = new ServiceMensagensInsert().CriarMensagemSucesso();
-            this.MensagemBoxComponent!.OpenMessageBox();
+            //this.MensagemBoxComponent!.Mensagem = new ServiceMensagensInsert().CriarMensagemSucesso();
+            // this.MensagemBoxComponent!.OpenMessageBox();
           },
           error: err => {
-            this.MensagemBoxComponent!.Mensagem = new ServiceMensagensInsert().CriarMensagemErro();
-            this.MensagemBoxComponent!.OpenMessageBox();
+            //this.MensagemBoxComponent!.Mensagem = new ServiceMensagensInsert().CriarMensagemErro();
+            //this.MensagemBoxComponent!.OpenMessageBox();
           }
         })
         this.louder.CloseLoader();

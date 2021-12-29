@@ -29,6 +29,10 @@
             <div class="mb-3">
                 <label for="tipo">Conteudo Pai</label>
                 <input type="text"  (keyup)="GetConteudoPai($event)" class="form-control" formControlName="conteudoPai">
+            </div>
+            <div class="mb-3">
+                <label for="">Conteudo Encontrado: </label>
+                <strong>{{ConteudoHeaderEncontrado?.titulo}}</strong>
             </div>    
         </div>
 

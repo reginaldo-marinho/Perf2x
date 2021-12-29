@@ -13,6 +13,8 @@ export class ConteudoHeader{
 }
 
 export class ConteudoDatalhes{
+    constructor (){
+    }
     codigo! :string;
     texto! :string;
     imagem?:Byte;

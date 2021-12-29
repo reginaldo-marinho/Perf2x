@@ -22,11 +22,9 @@ export class FormConteudoComponent implements OnInit {
 
   AlterarConteudo   : boolean = false;
   NivelTituloConteudo = this.conteudoService.NivelTituloConteudo;
-  
   ListConteudoHeader!: ConteudoHeader[];
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
-
   @Input() conteudoHeader!: ConteudoHeader;
 
   FormConteudo = this.fb.group({
@@ -79,24 +77,32 @@ export class FormConteudoComponent implements OnInit {
   }
 
   TransferirFormConteudoParaObjeto(): ConteudoHeader{
-    //this.conteudoHeader.codigo = String(this.FormConteudo.get('codigo'));
-    //this.conteudoHeader.nivelConteudo = Number(this.FormConteudo.get('nivelConteudo'));
-    //this.conteudoHeader.titulo = String(this.FormConteudo.get('titulo'));
-    //this.conteudoHeader.posicao = Number(this.FormConteudo.get('posicao'));
-
-    this.conteudoDatalhesForm.getRawValue().forEach(conteudoDetalhe => {
-      conteudoDetalhe["texto"]
-    })
-    
-
-    return this.conteudoHeader
+    this.conteudoHeader = new ConteudoHeader();
+    this.conteudoHeader.codigo        = String(this.FormConteudo.get('codigo')?.value);
+    this.conteudoHeader.nivelConteudo = Number(this.FormConteudo.get('nivelConteudo')?.value);
+    this.conteudoHeader.titulo        = String(this.FormConteudo.get('titulo')?.value);
+    this.conteudoHeader.posicao       = Number(this.FormConteudo.get('posicao')?.value);
+    this.conteudoHeader.conteudoPai!  = this.ConteudoHeaderEncontrado!.codigo;
+    this.conteudoHeader.conteudoDatalhes = this.CriarListaDetalhe(this.conteudoHeader);
+    return this.conteudoHeader;
   }
+
+  CriarListaDetalhe(conteudoHeader:ConteudoHeader):ConteudoDatalhes[]{
+    var detalhe  = new ConteudoDatalhes();
+    var listaDetalhes = new Array() ;
+    this.conteudoDatalhesForm.getRawValue().forEach(function(conteudoDetalhe,indice) {
+      detalhe.codigo = conteudoHeader.codigo;
+      detalhe.codigoHeader = conteudoHeader.codigo;
+      detalhe.texto = conteudoDetalhe["texto"];
+      detalhe.linha = indice+1
+      listaDetalhes.push(detalhe)
+    })
+    return  listaDetalhes;
+  }
+
   GetConteudoPai(event?:any){
     this.TextoParaFiltrar = event.target.value;
-    this.ConteudoHeaderEncontrado = this.ListConteudoHeader.find(con => con.titulo.toLocaleUpperCase().indexOf(this.TextoParaFiltrar.toUpperCase()) > -1);  
-    if (this.ConteudoHeaderEncontrado?.codigo.length! > 0){
-        this.conteudoHeader.conteudoPai! =String(this.ConteudoHeaderEncontrado!.codigo)
-    }   
+    this.ConteudoHeaderEncontrado = this.ListConteudoHeader.find(con => con.titulo.toLocaleUpperCase().indexOf(this.TextoParaFiltrar.toUpperCase()) > -1);   
   }
 
   CreateListConteudoHeader(){
@@ -108,17 +114,10 @@ export class FormConteudoComponent implements OnInit {
     });
   }
 
-  save(conteudo:ConteudoHeader) { 
-      this.TransferirFormConteudoParaObjeto();
-      //this.louder.OpenLoader();
-      conteudo.nivelConteudo = Number(conteudo.nivelConteudo) 
-      conteudo.conteudoDatalhes.forEach(function CompletarDadosDetalhe(_contedoDetalhe, indice) {
-        _contedoDetalhe.codigo = conteudo.codigo
-        _contedoDetalhe.codigoHeader =  conteudo.codigo
-        _contedoDetalhe.linha = indice +1;
-      })
-
-       this.conteudoService.saveConteudo(conteudo).subscribe(      
+  SalvarConteudo(){ 
+       this.conteudoHeader = this.TransferirFormConteudoParaObjeto();
+       this.louder.OpenLoader();
+       this.conteudoService.saveConteudo(this.conteudoHeader).subscribe(      
         {
           next:(conteudo:ConteudoHeader) => {
             //this.MensagemBoxComponent!.Mensagem = new ServiceMensagensInsert().CriarMensagemSucesso();
@@ -129,7 +128,7 @@ export class FormConteudoComponent implements OnInit {
             //this.MensagemBoxComponent!.OpenMessageBox();
           }
         })
-        //this.louder.CloseLoader();
+        this.louder.CloseLoader();
   }
 
     update(conteudo:any){

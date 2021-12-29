@@ -12,7 +12,6 @@ import { ConteudoService } from "./conteudo.service";
 export class FormConteudoComponent implements OnInit {
 
   constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService){  }
-
   ngOnInit(){
       if (this.activatedRoute.snapshot.paramMap.get("codconteudo") != null){
           this.AlterarConteudo = true
@@ -79,22 +78,25 @@ export class FormConteudoComponent implements OnInit {
     this.conteudoHeader.conteudoDatalhes!.forEach( detalhe => this.AdicionarNovoDetalheComValor(detalhe))
   }
 
-  TransferirFormConteudoParaObjetoEncontrado(): ConteudoHeader{
-    this.conteudoHeader.codigo = String(this.FormConteudo.get('codigo'));
-    this.conteudoHeader.nivelConteudo = Number(this.FormConteudo.get('nivelConteudo'));
-    this.conteudoHeader.titulo = String(this.FormConteudo.get('titulo'));
-    this.conteudoHeader.posicao = Number(this.FormConteudo.get('posicao'));
-    console.log(this.conteudoDatalhesForm.getRawValue());
-    return this.conteudoHeader;
+  TransferirFormConteudoParaObjeto(): ConteudoHeader{
+    //this.conteudoHeader.codigo = String(this.FormConteudo.get('codigo'));
+    //this.conteudoHeader.nivelConteudo = Number(this.FormConteudo.get('nivelConteudo'));
+    //this.conteudoHeader.titulo = String(this.FormConteudo.get('titulo'));
+    //this.conteudoHeader.posicao = Number(this.FormConteudo.get('posicao'));
+
+    this.conteudoDatalhesForm.getRawValue().forEach(conteudoDetalhe => {
+      conteudoDetalhe["texto"]
+    })
+    
+
+    return this.conteudoHeader
   }
-
-
   GetConteudoPai(event?:any){
     this.TextoParaFiltrar = event.target.value;
     this.ConteudoHeaderEncontrado = this.ListConteudoHeader.find(con => con.titulo.toLocaleUpperCase().indexOf(this.TextoParaFiltrar.toUpperCase()) > -1);  
-    //if (this.ConteudoHeaderEncontrado?.codigo.length! > 0){
-       // this.conteudoHeader.ConteudoPai! = this.ConteudoHeaderEncontrado!.codigo
-    //}   
+    if (this.ConteudoHeaderEncontrado?.codigo.length! > 0){
+        this.conteudoHeader.conteudoPai! =String(this.ConteudoHeaderEncontrado!.codigo)
+    }   
   }
 
   CreateListConteudoHeader(){
@@ -107,7 +109,7 @@ export class FormConteudoComponent implements OnInit {
   }
 
   save(conteudo:ConteudoHeader) { 
-      this.TransferirFormConteudoParaObjetoEncontrado();
+      this.TransferirFormConteudoParaObjeto();
       //this.louder.OpenLoader();
       conteudo.nivelConteudo = Number(conteudo.nivelConteudo) 
       conteudo.conteudoDatalhes.forEach(function CompletarDadosDetalhe(_contedoDetalhe, indice) {

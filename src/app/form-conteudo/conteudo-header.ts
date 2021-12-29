@@ -8,7 +8,7 @@ export class ConteudoHeader{
     titulo! :string;
     posicao!:number;
     nivelConteudo!:number;
-    ConteudoPai!:string;
+    conteudoPai!:string;
     conteudoDatalhes!: ConteudoDatalhes[];
 }
 

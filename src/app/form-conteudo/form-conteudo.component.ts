@@ -1,4 +1,3 @@
-
 import {  Component, Input, OnInit } from "@angular/core";
 import { FormGroup,FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -15,18 +14,16 @@ export class FormConteudoComponent implements OnInit {
   constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService){  }
 
   ngOnInit(){
-      const id =  this.activatedRoute.snapshot.paramMap.get("codconteudo");
-      if(id != null){
+      if (this.activatedRoute.snapshot.paramMap.get("codconteudo") != null){
           this.AlterarConteudo = true
-          this.GetConteudoById(id)
+          this.GetConteudoById(String(this.activatedRoute.snapshot.paramMap.get("codconteudo")))
       }
       this.CreateListConteudoHeader();
   }
 
   AlterarConteudo   : boolean = false;
-  AddConteudoAlteracao : boolean = false;
   NivelTituloConteudo = this.conteudoService.NivelTituloConteudo;
-
+  
   ListConteudoHeader!: ConteudoHeader[];
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
@@ -36,57 +33,68 @@ export class FormConteudoComponent implements OnInit {
   FormConteudo = this.fb.group({
     codigo:  ['', Validators.required],
     nivelConteudo:['', Validators.required],
-    conteudoPai:  [''],
+    conteudoPai:  ['', Validators.required], 
     titulo:  ['', Validators.required],
     posicao: ['', Validators.required],
     conteudoDatalhes: this.fb.array([])
   })
   
-  get conteudoDatalhes():FormArray{
+  get conteudoDatalhesForm():FormArray{
      return this.FormConteudo.get('conteudoDatalhes') as FormArray 
   }
 
-  AddConteudoDetalhe(detalhe: ConteudoDatalhes|any){
-
+  AdicionarNovoDetalheVazio(){
     var DetalheGroup:FormGroup;
-
-    if(detalhe != undefined){
-      DetalheGroup = this.fb.group({
-        texto: [detalhe.texto],
-        imagem: []
-      })
-    }else
-    {
-      DetalheGroup = this.fb.group({
+    DetalheGroup = this.fb.group({
         texto: ['', Validators.required],
         imagem: ['']
-      })
-    }
-    this.conteudoDatalhes.push(DetalheGroup!);
+    })
+    this.conteudoDatalhesForm.push(DetalheGroup!);
   }
 
-  GetConteudoById(id : number|string): ConteudoHeader{
-    this.conteudoService.getConteudoById(id).subscribe({
+  AdicionarNovoDetalheComValor(detalhe: ConteudoDatalhes){
+    var DetalheGroup:FormGroup;
+    DetalheGroup = this.fb.group({
+      texto: [detalhe.texto],
+      imagem: []
+    })
+    this.conteudoDatalhesForm.push(DetalheGroup!);
+  }
+
+  GetConteudoById(codigoConteudo :string): ConteudoHeader{
+    this.conteudoService.getConteudoById(codigoConteudo).subscribe({
       next:(conteudo)=> {
          this.conteudoHeader = conteudo
-         this.TransferObsejectHeader();
+         this.TransferirObjetoEncontradoParaFormConteudo();
       }
     })
     return this.conteudoHeader;
   }
 
-  TransferObsejectHeader(){
+  TransferirObjetoEncontradoParaFormConteudo(){
     this.FormConteudo.get('codigo')?.setValue(this.conteudoHeader.codigo)
     this.FormConteudo.get('nivelConteudo')?.setValue(this.conteudoHeader.nivelConteudo)
     this.FormConteudo.get('titulo')?.setValue(this.conteudoHeader.titulo)
     this.FormConteudo.get('posicao')?.setValue(this.conteudoHeader.posicao)
-    this.conteudoHeader.conteudoDatalhes!.forEach( cont => this.AddConteudoDetalhe(cont))
+    this.conteudoHeader.conteudoDatalhes!.forEach( detalhe => this.AdicionarNovoDetalheComValor(detalhe))
   }
+
+  TransferirFormConteudoParaObjetoEncontrado(): ConteudoHeader{
+    this.conteudoHeader.codigo = String(this.FormConteudo.get('codigo'));
+    this.conteudoHeader.nivelConteudo = Number(this.FormConteudo.get('nivelConteudo'));
+    this.conteudoHeader.titulo = String(this.FormConteudo.get('titulo'));
+    this.conteudoHeader.posicao = Number(this.FormConteudo.get('posicao'));
+    console.log(this.conteudoDatalhesForm.getRawValue());
+    return this.conteudoHeader;
+  }
+
 
   GetConteudoPai(event?:any){
     this.TextoParaFiltrar = event.target.value;
-    this.ConteudoHeaderEncontrado = this.ListConteudoHeader.find(con => con.titulo.toLocaleUpperCase().indexOf(this.TextoParaFiltrar.toUpperCase()) > -1);
-    //this.FormConteudo.get('conteudoPai')?.setValue(this.ConteudoHeaderEncontrado?.titulo)
+    this.ConteudoHeaderEncontrado = this.ListConteudoHeader.find(con => con.titulo.toLocaleUpperCase().indexOf(this.TextoParaFiltrar.toUpperCase()) > -1);  
+    //if (this.ConteudoHeaderEncontrado?.codigo.length! > 0){
+       // this.conteudoHeader.ConteudoPai! = this.ConteudoHeaderEncontrado!.codigo
+    //}   
   }
 
   CreateListConteudoHeader(){
@@ -98,14 +106,16 @@ export class FormConteudoComponent implements OnInit {
     });
   }
 
-  save(conteudo:ConteudoHeader) {
-     this.louder.OpenLoader();
+  save(conteudo:ConteudoHeader) { 
+      this.TransferirFormConteudoParaObjetoEncontrado();
+      //this.louder.OpenLoader();
       conteudo.nivelConteudo = Number(conteudo.nivelConteudo) 
-      for(let i in conteudo.conteudoDatalhes){
-        conteudo.conteudoDatalhes[Number(i)].linha = Number(i)+1
-        conteudo.conteudoDatalhes[Number(i)].codigo =conteudo.codigo
-        conteudo.conteudoDatalhes[Number(i)].codigoHeader = conteudo.codigo
-      }
+      conteudo.conteudoDatalhes.forEach(function CompletarDadosDetalhe(_contedoDetalhe, indice) {
+        _contedoDetalhe.codigo = conteudo.codigo
+        _contedoDetalhe.codigoHeader =  conteudo.codigo
+        _contedoDetalhe.linha = indice +1;
+      })
+
        this.conteudoService.saveConteudo(conteudo).subscribe(      
         {
           next:(conteudo:ConteudoHeader) => {
@@ -117,8 +127,8 @@ export class FormConteudoComponent implements OnInit {
             //this.MensagemBoxComponent!.OpenMessageBox();
           }
         })
-        this.louder.CloseLoader();
-    }
+        //this.louder.CloseLoader();
+  }
 
     update(conteudo:any){
       conteudo.nivelConteudo = Number(conteudo.nivelConteudo) 
@@ -135,7 +145,7 @@ export class FormConteudoComponent implements OnInit {
       })
     }
 
-    delete(id:string|undefined):void{
+    delete(id:string):void{
       this.conteudoService.deleteConteudo(id!).subscribe({
           next:()=>{
               console.log("Conteudo Excluido");

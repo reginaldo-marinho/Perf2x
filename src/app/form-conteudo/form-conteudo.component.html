@@ -56,7 +56,7 @@
         </div>
         <div class="border rounded mb-3">
            <div formArrayName="conteudoDatalhes">
-                <div *ngFor="let detalhe of conteudoDatalhes.controls; index as posicao">
+                <div *ngFor="let detalhe of conteudoDatalhesForm.controls; index as posicao">
                     <div [formGroupName]="posicao">
                         <div class="mb-3 me-1 ms-1">
                             <label for="texto" class="form-label">texto</label>
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="mb-3">
-                <h2><i class="bi bi-plus-lg" (click)="AddConteudoDetalhe(null)"></i></h2>
+                <h2><i class="bi bi-plus-lg" (click)="AdicionarNovoDetalheVazio()"></i></h2>
             </div>
         </div>
         <button type="submit" class="btn bg-blue me-1" (click)="save(FormConteudo.value)"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>

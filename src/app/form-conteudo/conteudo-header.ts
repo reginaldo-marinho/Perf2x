@@ -1,16 +1,14 @@
 import { Byte } from "@angular/compiler/src/util";
 
-
 export class ConteudoHeader{
-
 
     constructor (){
     }
-
     codigo! :string;
     titulo! :string;
     posicao!:number;
     nivelConteudo!:number;
+    ConteudoPai!:string;
     conteudoDatalhes!: ConteudoDatalhes[];
 }
 

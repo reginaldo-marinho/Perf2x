@@ -3,8 +3,7 @@
     <div>
         <h1 class="text-center">Criando uma Nova História </h1>
     </div>
-    <form  autocomplete="off"  [formGroup]="FormConteudo" #conteudo="ngForm"  *ngIf="conteudoHeader || !AlterarConteudo ">
-        
+    <form  autocomplete="off"  [formGroup]="FormConteudo" *ngIf="conteudoHeader || !AlterarConteudo ">
         <div class="mb-3" *ngIf="!AlterarConteudo">
             <label for="codigo" class="form-label">Codigo</label>
             <input type="text"  class="form-control" formControlName='codigo' required>
@@ -16,8 +15,8 @@
         </div>
         <div class="mb-3">
             <label for="tipo">Tipo do Conteudo</label>
-            <select  class="form-select" formControlName="nivelConteudo" >
-                <option *ngFor="let item of NivelTituloConteudo" [value]="item.valor">{{item.nivel}}</option>
+            <select  class="form-select" formControlName="nivelConteudo" #NivelDoTitulo>
+                <option *ngFor="let item of ListNivelTituloConteudo" [value]="item.valor" >{{item.nivel}}</option>
             </select>
             <div *ngIf="this.FormConteudo.get('nivelConteudo')!.errors?.['required']">
                 <div class="invalid-field-danger color-red mt-1">
@@ -25,7 +24,7 @@
                 </div>    
             </div>
         </div>
-        <div>
+        <div *ngIf="NivelDoTitulo.value > '1'">
             <div class="mb-3">
                 <label for="tipo">Conteudo Pai</label>
                 <input type="text"  (keyup)="GetConteudoPai($event)" class="form-control" formControlName="conteudoPai">
@@ -70,11 +69,12 @@
                 </div>
             </div>
             <div class="mb-3">
-                <h2><i class="bi bi-plus-lg" (click)="AdicionarNovoDetalheVazio()"></i></h2>
+                <i class="bi bi-plus-lg" style="font-size: 40px" (click)="AdicionarNovoDetalheVazio()"></i>
+                <i class="bi bi-images"  (click)="AdicionarNovoDetalheVazio()"></i>
+
             </div>
         </div>
         <button type="submit" class="btn bg-blue me-1" (click)="SalvarConteudo()"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>
-        <button type="submit" class="btn bg-blue me-1"  >Upload <i class="bi bi-patch-plus"></i></button>
         <button type="submit" class="btn bg-blue me-1" (click)="update(FormConteudo.value)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}"> Alterar <i class="bi bi-pencil-fill"></i></button>
         <button type="submit" class="btn bg-blue me-1" (click)="delete(conteudoHeader.codigo)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}" >Excluir <i class="bi bi-trash"></i></button> 
         <a class="btn navbar-bg-green bg-yellow" [routerLink]="['/menu-brazukas']" routerLinkActive="router-link-active" >Voltar <i class="bi bi-arrow-left"></i></a>

@@ -21,7 +21,7 @@ export class FormConteudoComponent implements OnInit {
   }
 
   AlterarConteudo   : boolean = false;
-  NivelTituloConteudo = this.conteudoService.NivelTituloConteudo;
+  ListNivelTituloConteudo = this.conteudoService.NivelTituloConteudo;
   ListConteudoHeader!: ConteudoHeader[];
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
@@ -29,8 +29,8 @@ export class FormConteudoComponent implements OnInit {
 
   FormConteudo = this.fb.group({
     codigo:  ['', Validators.required],
-    nivelConteudo:['', Validators.required],
-    conteudoPai:  ['', Validators.required], 
+    nivelConteudo:['',Validators.required],
+    conteudoPai:  [''], 
     titulo:  ['', Validators.required],
     posicao: ['', Validators.required],
     conteudoDatalhes: this.fb.array([])

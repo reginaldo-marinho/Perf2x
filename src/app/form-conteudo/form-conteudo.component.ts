@@ -57,6 +57,58 @@ export class FormConteudoComponent implements OnInit {
     })
     this.conteudoDatalhesForm.push(DetalheGroup!);
   }
+  
+  CriarElementoTexto(t: any){
+    console.log(t)
+    this.MapearTextAreaTextoVazioFormGroup();
+    this.CriarElementoDetalheTipoTextArea();
+  }
+
+  CriarElementoImagem(t: any){
+    console.log(t)
+    this.MapearInputImagemVazioFormGroup();
+    this.CriarElementoDetalheTipoImagem();
+  }
+
+  CriarElementoDetalheTipoImagem(){
+    let AreaDeConteudo = document.getElementById("area-de-conteudo")
+    let Imagem = document.createElement("input");
+
+    Imagem.setAttribute("type","file");
+    Imagem.setAttribute("class","form-control");
+    Imagem.setAttribute("name","imagem");
+    Imagem.setAttribute("formControlName","imagem");
+    AreaDeConteudo?.appendChild(Imagem);
+
+  }
+
+  CriarElementoDetalheTipoTextArea(){
+    let AreaDeConteudo = document.getElementById("area-de-conteudo")
+    let TextArea = document.createElement("textarea");
+    TextArea.setAttribute("class","form-control");
+    TextArea.setAttribute("name","imagem");
+    TextArea.setAttribute("formControlName","texto");
+    TextArea.setAttribute("style","height: 200px;");
+
+    AreaDeConteudo?.appendChild(TextArea);
+
+  }
+
+  MapearInputImagemVazioFormGroup(){
+    this.conteudoDatalhesForm.push(
+      this.fb.group({
+      imagem: ['']
+      })
+    );
+  }
+
+  MapearTextAreaTextoVazioFormGroup(){
+    this.conteudoDatalhesForm.push(
+      this.fb.group({
+        texto: ['']
+      })
+    );
+  }
 
   GetConteudoById(codigoConteudo :string): ConteudoHeader{
     this.conteudoService.getConteudoById(codigoConteudo).subscribe({

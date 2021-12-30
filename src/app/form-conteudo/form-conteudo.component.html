@@ -53,25 +53,19 @@
                 </div>    
             </div>
         </div>
-        <div class="border rounded mb-3">
+        <div class="rounded mb-3">
            <div formArrayName="conteudoDatalhes">
                 <div *ngFor="let detalhe of conteudoDatalhesForm.controls; index as posicao">
                     <div [formGroupName]="posicao">
-                        <div class="mb-3 me-1 ms-1">
-                            <label for="texto" class="form-label">texto</label>
-                            <textarea class="form-control" formControlName="texto" style="height: 300px;"></textarea>
-                        </div>
-                        <div class="mb-3 me-1 ms-1">
-                            <label for="formFile" class="form-label">Anexar arquivo</label>
-                            <input class="form-control"  name="imagem" type="file" formControlName="imagem">
-                        </div>                  
+                        <div class="mb-3 me-1 ms-1" id="area-de-conteudo">
+                            
+                        </div>               
                     </div> 
                 </div>
             </div>
             <div class="mb-3">
-                <i class="bi bi-plus-lg" style="font-size: 40px" (click)="AdicionarNovoDetalheVazio()"></i>
-                <i class="bi bi-images"  (click)="AdicionarNovoDetalheVazio()"></i>
-
+                <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto(FormConteudo)" title="Adicinar area de texto"></i>
+                <i class="bi bi-images     btn-det-cont font-s-30" (click)="CriarElementoImagem(FormConteudo)" title="Adicinar imagem ao conteudo"></i>
             </div>
         </div>
         <button type="submit" class="btn bg-blue me-1" (click)="SalvarConteudo()"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>
@@ -81,3 +75,5 @@
     </form>
 </div>
 <app-loader></app-loader>
+
+

@@ -85,10 +85,6 @@ export class FormConteudoComponent implements OnInit {
 
   }
 
-  ValidarArquivoImagem(event: any){
-    console.log(event)
-  }
-
   CriarElementoDetalheTipoTextArea(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
     let TextArea = document.createElement("textarea");

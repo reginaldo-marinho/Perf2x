@@ -7,4 +7,7 @@ import { Component } from "@angular/core";
 })
 export class InputImagemComponent{
 
+    ValidarArquivoImagem(event: any){
+        console.log(event)
+      }    
 }

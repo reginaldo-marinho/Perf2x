@@ -3,7 +3,7 @@
     <div>
         <h1 class="text-center">Criando uma Nova História </h1>
     </div>
-    <form  autocomplete="off"  [formGroup]="FormConteudo" *ngIf="conteudoHeader || !AlterarConteudo ">
+    <form  autocomplete="off"  [formGroup]="FormConteudo" *ngIf="conteudoHeader || !AlterarConteudo "id = "form-conteudo" >
         <div class="mb-3" *ngIf="!AlterarConteudo">
             <label for="codigo" class="form-label">Codigo</label>
             <input type="text"  class="form-control" formControlName='codigo' required>
@@ -57,16 +57,19 @@
            <div formArrayName="conteudoDatalhes">
                 <div *ngFor="let detalhe of conteudoDatalhesForm.controls; index as posicao">
                     <div [formGroupName]="posicao">
-                        <div class="mb-3 me-1 ms-1" id="area-de-conteudo"></div>               
+                        <div class="mb-3 me-1 ms-1" id="area-de-conteudo">
+
+                        </div>               
                     </div> 
                 </div>
             </div>
             <div class="mb-3">
-                <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto(FormConteudo)" title="Adicinar area de texto"></i>
-                <i class="bi bi-images     btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoImagem(FormConteudo)" title="Adicinar imagem ao conteudo"></i>
+                <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto()" title="Adicinar area de texto"></i>
+                <i class="bi bi-images     btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoImagem()" title="Adicinar imagem ao conteudo"></i>
                 <i class="bi bi-youtube    btn-det-cont font-s-30"   ></i>
             </div>
         </div>
+        
         <button type="submit" class="btn bg-blue me-1" (click)="SalvarConteudo()"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>
         <button type="submit" class="btn bg-blue me-1" (click)="update(FormConteudo.value)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}"> Alterar <i class="bi bi-pencil-fill"></i></button>
         <button type="submit" class="btn bg-blue me-1" (click)="delete(conteudoHeader.codigo)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}" >Excluir <i class="bi bi-trash"></i></button> 

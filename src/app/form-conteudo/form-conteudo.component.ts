@@ -59,12 +59,12 @@ export class FormConteudoComponent implements OnInit {
     this.conteudoDatalhesForm.push(DetalheGroup!);
   }
   
-  CriarElementoTexto(t: any){
+  CriarElementoTexto(){
     this.MapearTextAreaTextoVazioFormGroup();
     this.CriarElementoDetalheTipoTextArea();
   }
 
-  CriarElementoImagem(t: any){
+  CriarElementoImagem(){
     this.MapearInputImagemVazioFormGroup();
     this.CriarElementoDetalheTipoImagem();
   }
@@ -72,17 +72,39 @@ export class FormConteudoComponent implements OnInit {
   
   CriarElementoDetalheTipoTextArea(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
-    let TextArea = document.createElement("input-text-area-component");
-    AreaDeConteudo?.append(TextArea);
+    let TextArea = document.createElement("textarea");
+    TextArea.setAttribute("class","form-control");
+    TextArea.setAttribute("name","imagem");
+    TextArea.setAttribute("formControlName","texto");
+    TextArea.setAttribute("style","height: 200px;");
+
+    AreaDeConteudo?.appendChild(TextArea);
 
   }
 
   CriarElementoDetalheTipoImagem(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
-    let Imagem = document.createElement("input-imagem-component");
+    let Imagem = document.createElement("input");
+    Imagem.setAttribute("type","file");
+    Imagem.setAttribute("class","form-control");
+    Imagem.setAttribute("name","imagem");
+    Imagem.setAttribute("formControlName","imagem");
+    Imagem.setAttribute("change","ValidarArquivoImagem($event)");
     AreaDeConteudo?.appendChild(Imagem);
-    console.log(Imagem)
+    Imagem.addEventListener("change",this.ValidarArquivoImagem)
     Imagem.click();
+  }
+  ValidarArquivoImagem(event: any){
+    //var extensoesPermitidas = /(.jpg|.jpeg|.png|.gif)$/i;
+    //if(!extensoesPermitidas.exec(event.target.files[0].value)){
+     // alert("Tipo de extenção de arquivo errado!");
+    //}
+   // event.target.files[0].size
+   let AreaDeConteudo = document.getElementById("area-de-conteudo")
+   let img  = document.createElement("img");
+   img.src = URL.createObjectURL(event.target.files[0]);
+   AreaDeConteudo?.appendChild(img);
+  
   }
 
   MapearInputImagemVazioFormGroup(){

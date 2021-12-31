@@ -73,13 +73,15 @@ export class FormConteudoComponent implements OnInit {
   CriarElementoDetalheTipoTextArea(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
     let TextArea = document.createElement("input-text-area-component");
-    AreaDeConteudo?.appendChild(TextArea);
+    AreaDeConteudo?.append(TextArea);
+
   }
-  
+
   CriarElementoDetalheTipoImagem(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
-    let Imagem =      document.createElement("input-imagem-component");
+    let Imagem = document.createElement("input-imagem-component");
     AreaDeConteudo?.appendChild(Imagem);
+    console.log(Imagem)
     Imagem.click();
   }
 

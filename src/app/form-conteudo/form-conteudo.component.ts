@@ -1,4 +1,3 @@
-import { elementEventFullName } from "@angular/compiler/src/view_compiler/view_compiler";
 import {  Component, Input, OnInit } from "@angular/core";
 import { FormGroup,FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -95,15 +94,10 @@ export class FormConteudoComponent implements OnInit {
     Imagem.click();
   }
   ValidarArquivoImagem(event: any){
-    //var extensoesPermitidas = /(.jpg|.jpeg|.png|.gif)$/i;
-    //if(!extensoesPermitidas.exec(event.target.files[0].value)){
-     // alert("Tipo de extenção de arquivo errado!");
-    //}
-   // event.target.files[0].size
-   let AreaDeConteudo = document.getElementById("area-de-conteudo")
-   let img  = document.createElement("img");
-   img.src = URL.createObjectURL(event.target.files[0]);
-   AreaDeConteudo?.appendChild(img);
+    let AreaDeConteudo = document.getElementById("area-de-conteudo")
+    let img  = document.createElement("img");
+    img.src = URL.createObjectURL(event.target.files[0]);
+    AreaDeConteudo?.appendChild(img);
   
   }
 
@@ -185,12 +179,8 @@ export class FormConteudoComponent implements OnInit {
        this.conteudoService.saveConteudo(this.conteudoHeader).subscribe(      
         {
           next:(conteudo:ConteudoHeader) => {
-            //this.MensagemBoxComponent!.Mensagem = new ServiceMensagensInsert().CriarMensagemSucesso();
-            // this.MensagemBoxComponent!.OpenMessageBox();
           },
           error: err => {
-            //this.MensagemBoxComponent!.Mensagem = new ServiceMensagensInsert().CriarMensagemErro();
-            //this.MensagemBoxComponent!.OpenMessageBox();
           }
         })
         this.louder.CloseLoader();

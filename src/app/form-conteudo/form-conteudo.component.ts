@@ -1,3 +1,4 @@
+import { elementEventFullName } from "@angular/compiler/src/view_compiler/view_compiler";
 import {  Component, Input, OnInit } from "@angular/core";
 import { FormGroup,FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -78,8 +79,14 @@ export class FormConteudoComponent implements OnInit {
     Imagem.setAttribute("class","form-control");
     Imagem.setAttribute("name","imagem");
     Imagem.setAttribute("formControlName","imagem");
+    Imagem.setAttribute("(change)","ValidarArquivoImagem($event)");
     AreaDeConteudo?.appendChild(Imagem);
+    Imagem.click();
 
+  }
+
+  ValidarArquivoImagem(event: any){
+    console.log(event)
   }
 
   CriarElementoDetalheTipoTextArea(){

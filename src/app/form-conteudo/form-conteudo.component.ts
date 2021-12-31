@@ -60,26 +60,18 @@ export class FormConteudoComponent implements OnInit {
   }
   
   CriarElementoTexto(t: any){
-    console.log(t)
     this.MapearTextAreaTextoVazioFormGroup();
     this.CriarElementoDetalheTipoTextArea();
   }
 
   CriarElementoImagem(t: any){
-    console.log(t)
     this.MapearInputImagemVazioFormGroup();
     this.CriarElementoDetalheTipoImagem();
   }
 
   CriarElementoDetalheTipoImagem(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
-    let Imagem = document.createElement("input");
-
-    Imagem.setAttribute("type","file");
-    Imagem.setAttribute("class","form-control");
-    Imagem.setAttribute("name","imagem");
-    Imagem.setAttribute("formControlName","imagem");
-    Imagem.setAttribute("(change)","ValidarArquivoImagem($event)");
+    let Imagem = document.createElement("input-imagem-component");
     AreaDeConteudo?.appendChild(Imagem);
     Imagem.click();
 

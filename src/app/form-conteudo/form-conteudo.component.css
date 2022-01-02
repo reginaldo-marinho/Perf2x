@@ -17,3 +17,19 @@
     color: #2241cc;
     cursor: pointer;
 }
+.desc-input{
+    display: flex;
+    padding: 5px;
+    border: 3px solid  red;
+}
+
+.desc-input-img{
+    width: 12% ;
+    border: 1px solid;
+    margin-right: 5px !important;
+}
+
+.desc-input-img-details{
+    border: 1px solid;
+    width: 100%;
+}

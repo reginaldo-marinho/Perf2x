@@ -76,10 +76,9 @@ export class FormConteudoComponent implements OnInit {
     TextArea.setAttribute("name","imagem");
     TextArea.setAttribute("formControlName","texto");
     TextArea.setAttribute("style","height: 200px;");
-
     AreaDeConteudo?.appendChild(TextArea);
-
   }
+
 
   CriarElementoDetalheTipoImagem(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
@@ -92,13 +91,28 @@ export class FormConteudoComponent implements OnInit {
     AreaDeConteudo?.appendChild(Imagem);
     Imagem.addEventListener("change",this.ValidarArquivoImagem)
     Imagem.click();
+    return 
   }
+  
+  CriarDivQuadroDescricaoImagem(event: any): any{
+    let  DivQuandoInformacao = document.createElement("div");
+    DivQuandoInformacao.setAttribute("class","desc-input");
+    DivQuandoInformacao.appendChild(this.CriarElementMiniaturaImg(event));
+  }
+  CriarElementMiniaturaImg(event: any): Node{
+    let AreaDeConteudo = document.getElementById("area-de-conteudo")
+    let img  = document.createElement("img");
+    img.setAttribute("class","desc-input-img");
+    img.src = URL.createObjectURL(event.target.files[0]);
+    AreaDeConteudo?.appendChild(img);
+    return AreaDeConteudo!;
+  }
+
   ValidarArquivoImagem(event: any){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
     let img  = document.createElement("img");
     img.src = URL.createObjectURL(event.target.files[0]);
     AreaDeConteudo?.appendChild(img);
-  
   }
 
   MapearInputImagemVazioFormGroup(){

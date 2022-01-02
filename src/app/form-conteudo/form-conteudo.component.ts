@@ -94,21 +94,30 @@ export class FormConteudoComponent implements OnInit {
     return 
   }
   ValidarArquivoImagem(event: any){
-   let AreaDeConteudo = document.getElementById("area-de-conteudo")
-   
-   let  DivQuadroInformacao = document.createElement("div");
-   let img = document.createElement("img");
-   let  DivDescricaoImagem = document.createElement("div");
-   
-   DivQuadroInformacao.setAttribute("class","desc-input");
-   AreaDeConteudo?.appendChild(DivQuadroInformacao)
 
-   img.setAttribute("class","desc-input-img");
-   img.src = URL.createObjectURL(event.target.files[0]);
-   DivQuadroInformacao?.appendChild(img);
+    let AreaDeConteudo = document.getElementById("area-de-conteudo")
+    AreaDeConteudo?.appendChild(CriarDivCardImagem())
+    
+    function CriarDivCardImagem():Node{
+      let  DivQuadroInformacao = document.createElement("div");
+      DivQuadroInformacao.setAttribute("class","desc-input");
+      DivQuadroInformacao?.appendChild(CriarMiniaturaImagem(event));
+      DivQuadroInformacao.appendChild(CriarDivDetalhesImagem());
+      return DivQuadroInformacao;
+    }
+    function CriarMiniaturaImagem(event: any):Node{
+      let imagem = document.createElement("img");
+      imagem.setAttribute("class","desc-input-img");
+      imagem.src = URL.createObjectURL(event.target.files[0]);
+      return imagem;
+    }
 
-   DivDescricaoImagem.setAttribute("class","desc-input-img-details");
-   DivQuadroInformacao?.appendChild(DivDescricaoImagem);
+    function CriarDivDetalhesImagem(){
+      let  DivDescricaoImagem = document.createElement("div");
+      DivDescricaoImagem.setAttribute("class","desc-input-img-details");
+      return DivDescricaoImagem;
+    }
+    
   }
 
   MapearInputImagemVazioFormGroup(){

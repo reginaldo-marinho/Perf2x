@@ -93,26 +93,22 @@ export class FormConteudoComponent implements OnInit {
     Imagem.click();
     return 
   }
-  
-  CriarDivQuadroDescricaoImagem(event: any): any{
-    let  DivQuandoInformacao = document.createElement("div");
-    DivQuandoInformacao.setAttribute("class","desc-input");
-    DivQuandoInformacao.appendChild(this.CriarElementMiniaturaImg(event));
-  }
-  CriarElementMiniaturaImg(event: any): Node{
-    let AreaDeConteudo = document.getElementById("area-de-conteudo")
-    let img  = document.createElement("img");
-    img.setAttribute("class","desc-input-img");
-    img.src = URL.createObjectURL(event.target.files[0]);
-    AreaDeConteudo?.appendChild(img);
-    return AreaDeConteudo!;
-  }
-
   ValidarArquivoImagem(event: any){
-    let AreaDeConteudo = document.getElementById("area-de-conteudo")
-    let img  = document.createElement("img");
-    img.src = URL.createObjectURL(event.target.files[0]);
-    AreaDeConteudo?.appendChild(img);
+   let AreaDeConteudo = document.getElementById("area-de-conteudo")
+   
+   let  DivQuadroInformacao = document.createElement("div");
+   let img = document.createElement("img");
+   let  DivDescricaoImagem = document.createElement("div");
+   
+   DivQuadroInformacao.setAttribute("class","desc-input");
+   AreaDeConteudo?.appendChild(DivQuadroInformacao)
+
+   img.setAttribute("class","desc-input-img");
+   img.src = URL.createObjectURL(event.target.files[0]);
+   DivQuadroInformacao?.appendChild(img);
+
+   DivDescricaoImagem.setAttribute("class","desc-input-img-details");
+   DivQuadroInformacao?.appendChild(DivDescricaoImagem);
   }
 
   MapearInputImagemVazioFormGroup(){

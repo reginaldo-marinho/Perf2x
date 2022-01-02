@@ -38,3 +38,19 @@ body{
 .color-red{
     color: rgba(255, 0, 0, 0.651) !important;
 }
+
+.desc-input{
+    display: flex ;
+    padding: 5px;
+    border: 3px solid  red;
+}
+
+.desc-input-img{
+    max-width: 12%;
+    margin-right: 5px !important;
+}
+
+.desc-input-img-details{
+    border: 1px solid;
+    width: 100%;
+}

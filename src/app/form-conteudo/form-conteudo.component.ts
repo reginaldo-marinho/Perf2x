@@ -25,6 +25,7 @@ export class FormConteudoComponent implements OnInit {
   ListConteudoHeader!: ConteudoHeader[];
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
+  @Input() NomeNovoComponent!:string;
   @Input() conteudoHeader!: ConteudoHeader;
 
   FormConteudo = this.fb.group({
@@ -87,17 +88,17 @@ export class FormConteudoComponent implements OnInit {
     Imagem.setAttribute("class","form-control");
     Imagem.setAttribute("name","imagem");
     Imagem.setAttribute("formControlName","imagem");
-    Imagem.setAttribute("change","ValidarArquivoImagem($event)");
+    Imagem.setAttribute("change","TratarArquivoImagem($event)");
     AreaDeConteudo?.appendChild(Imagem);
-    Imagem.addEventListener("change",this.ValidarArquivoImagem)
-    Imagem.click();
-    return 
+    Imagem.addEventListener("change",this.TratarArquivoImagem)
+    Imagem.click(); 
   }
-  ValidarArquivoImagem(event: any){
+
+  TratarArquivoImagem(event: any){
 
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
     AreaDeConteudo?.appendChild(CriarDivCardImagem())
-    
+     
     function CriarDivCardImagem():Node{
       let  DivQuadroInformacao = document.createElement("div");
       DivQuadroInformacao.setAttribute("class","desc-input");
@@ -117,7 +118,21 @@ export class FormConteudoComponent implements OnInit {
       DivDescricaoImagem.setAttribute("class","desc-input-img-details");
       return DivDescricaoImagem;
     }
-    
+  }
+
+  CreateInputeTextLinkYoutube(){
+    let AreaDeConteudo = document.getElementById("area-de-conteudo")
+    let TexYoutube = document.createElement("input");
+    TexYoutube.setAttribute("class","form-control");
+    TexYoutube.setAttribute("type","text")
+    TexYoutube.setAttribute("name","idvideoyoutube");
+    TexYoutube.setAttribute("formControlName","idvideoyoutube");
+    TexYoutube.setAttribute("blur","ObterIdVideo()");
+    AreaDeConteudo?.appendChild(TexYoutube);
+  }
+
+  ObterIdVideo(){
+      alert("sccscsc")
   }
 
   MapearInputImagemVazioFormGroup(){
@@ -127,7 +142,6 @@ export class FormConteudoComponent implements OnInit {
       })
     );
   }
-
   MapearTextAreaTextoVazioFormGroup(){
     this.conteudoDatalhesForm.push(
       this.fb.group({

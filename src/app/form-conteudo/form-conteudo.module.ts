@@ -16,12 +16,12 @@ import { LoaderComponent } from "../shared/Loader/loader.component";
         AppRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     declarations:[
         FormConteudoComponent,
         LoaderComponent,
-        MensagemBoxComponent
+        MensagemBoxComponent,
     ],
     exports:[FormConteudoComponent] 
 

@@ -3,7 +3,7 @@
     <div>
         <h1 class="text-center">Criando uma Nova História </h1>
     </div>
-    <form  autocomplete="off"  [formGroup]="FormConteudo" *ngIf="conteudoHeader || !AlterarConteudo "id = "form-conteudo" >
+    <form  autocomplete="off"  [formGroup]="FormConteudo" *ngIf="conteudoHeader || !AlterarConteudo "id = "form-conteudo">
         <div class="mb-3" *ngIf="!AlterarConteudo">
             <label for="codigo" class="form-label">Codigo</label>
             <input type="text"  class="form-control" formControlName='codigo' required>
@@ -66,7 +66,7 @@
             <div class="mb-3">
                 <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto()" title="Adicinar area de texto"></i>
                 <i class="bi bi-images     btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoImagem()" title="Adicinar imagem ao conteudo"></i>
-                <i class="bi bi-youtube    btn-det-cont font-s-30"   ></i>
+                <i class="bi bi-youtube    btn-det-cont font-s-30"   (click)="CreateInputeTextLinkYoutube()" ></i>
             </div>
         </div>
         

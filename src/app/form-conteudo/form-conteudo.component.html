@@ -56,10 +56,7 @@
         <div class="rounded mb-3">
            <div formArrayName="conteudoDatalhes">
                 <div *ngFor="let detalhe of conteudoDatalhesForm.controls; index as posicao">
-                    <div [formGroupName]="posicao">
-                        <div class="mb-3 me-1 ms-1" id="area-de-conteudo">
-                            
-                        </div>               
+                    <div [formGroupName]="posicao" id="area-de-conteudo">       
                     </div> 
                 </div>
             </div>

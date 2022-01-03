@@ -17,6 +17,7 @@ export class FormConteudoComponent implements OnInit {
           this.AlterarConteudo = true
           this.GetConteudoById(String(this.activatedRoute.snapshot.paramMap.get("codconteudo")))
       }
+      
       this.CreateListConteudoHeader();
   }
 
@@ -25,7 +26,6 @@ export class FormConteudoComponent implements OnInit {
   ListConteudoHeader!: ConteudoHeader[];
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
-  @Input() NomeNovoComponent!:string;
   @Input() conteudoHeader!: ConteudoHeader;
 
   FormConteudo = this.fb.group({
@@ -34,7 +34,7 @@ export class FormConteudoComponent implements OnInit {
     conteudoPai:  [''], 
     titulo:  ['', Validators.required],
     posicao: ['', Validators.required],
-    conteudoDatalhes: this.fb.array([])
+    conteudoDatalhes: this.fb.array([this.fb.group({texto:[]})])
   })
   
   get conteudoDatalhesForm():FormArray{
@@ -60,37 +60,51 @@ export class FormConteudoComponent implements OnInit {
   }
   
   CriarElementoTexto(){
-    this.MapearTextAreaTextoVazioFormGroup();
     this.CriarElementoDetalheTipoTextArea();
+    this.MapearTextAreaTextoVazioFormGroup();
   }
 
   CriarElementoImagem(){
-    this.MapearInputImagemVazioFormGroup();
     this.CriarElementoDetalheTipoImagem();
+    this.MapearInputImagemVazioFormGroup();
   }
 
+  CriarDivInputDetalhes() :Node{
+      let  DivInputDetalhes = document.createElement("div");
+      DivInputDetalhes.setAttribute("class","mb-3 me-1 ms-1");
+      return DivInputDetalhes;
+    
+  }
   
   CriarElementoDetalheTipoTextArea(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
-    let TextArea = document.createElement("textarea");
-    TextArea.setAttribute("class","form-control");
-    TextArea.setAttribute("name","imagem");
-    TextArea.setAttribute("formControlName","texto");
-    TextArea.setAttribute("style","height: 200px;");
-    AreaDeConteudo?.appendChild(TextArea);
+    let div = this.CriarDivInputDetalhes();
+    div.appendChild(CriarTextArea());
+    AreaDeConteudo?.appendChild(div);
+   
+    function CriarTextArea():Node {
+      let TextArea = document.createElement("textarea");
+      TextArea.setAttribute("class","form-control");
+      TextArea.setAttribute("name","imagem");
+      TextArea.setAttribute("formControlName","texto");
+      TextArea.setAttribute("style","height: 200px;");
+      return TextArea;
+    }
   }
-
-
+  
   CriarElementoDetalheTipoImagem(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
+    let div = this.CriarDivInputDetalhes();
     let Imagem = document.createElement("input");
+
     Imagem.setAttribute("type","file");
     Imagem.setAttribute("class","form-control");
     Imagem.setAttribute("name","imagem");
     Imagem.setAttribute("formControlName","imagem");
     Imagem.setAttribute("change","TratarArquivoImagem($event)");
-    AreaDeConteudo?.appendChild(Imagem);
     Imagem.addEventListener("change",this.TratarArquivoImagem)
+    div.appendChild(Imagem);
+    AreaDeConteudo?.appendChild(div);
     Imagem.click(); 
   }
 
@@ -123,12 +137,15 @@ export class FormConteudoComponent implements OnInit {
   CreateInputeTextLinkYoutube(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
     let TexYoutube = document.createElement("input");
+    let div = this.CriarDivInputDetalhes();
+    
     TexYoutube.setAttribute("class","form-control");
     TexYoutube.setAttribute("type","text")
     TexYoutube.setAttribute("name","idvideoyoutube");
     TexYoutube.setAttribute("formControlName","idvideoyoutube");
     TexYoutube.setAttribute("blur","ObterIdVideo()");
-    AreaDeConteudo?.appendChild(TexYoutube);
+    div.appendChild(TexYoutube)
+    AreaDeConteudo?.appendChild(div);
   }
 
   ObterIdVideo(){

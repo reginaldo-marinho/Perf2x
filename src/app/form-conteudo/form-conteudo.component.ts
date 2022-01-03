@@ -58,7 +58,6 @@ export class FormConteudoComponent implements OnInit {
     })
     this.conteudoDatalhesForm.push(DetalheGroup!);
   }
-  
   CriarElementoTexto(){
     this.CriarElementoDetalheTipoTextArea();
     this.MapearTextAreaTextoVazioFormGroup();
@@ -109,7 +108,6 @@ export class FormConteudoComponent implements OnInit {
   }
 
   TratarArquivoImagem(event: any){
-
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
     AreaDeConteudo?.appendChild(CriarDivCardImagem())
      
@@ -224,7 +222,8 @@ export class FormConteudoComponent implements OnInit {
     });
   }
 
-  SalvarConteudo(){ 
+  SalvarConteudo(FormConteudo: any){
+       console.log(FormConteudo) 
        this.conteudoHeader = this.TransferirFormConteudoParaObjeto();
        this.louder.OpenLoader();
        this.conteudoService.saveConteudo(this.conteudoHeader).subscribe(      

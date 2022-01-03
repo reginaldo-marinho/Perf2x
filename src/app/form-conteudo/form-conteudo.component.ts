@@ -143,13 +143,14 @@ export class FormConteudoComponent implements OnInit {
     TexYoutube.setAttribute("type","text")
     TexYoutube.setAttribute("name","idvideoyoutube");
     TexYoutube.setAttribute("formControlName","idvideoyoutube");
-    TexYoutube.setAttribute("blur","ObterIdVideo()");
+    TexYoutube.addEventListener("blur",this.ObterIdVideo);
+    
     div.appendChild(TexYoutube)
     AreaDeConteudo?.appendChild(div);
   }
 
-  ObterIdVideo(){
-      alert("sccscsc")
+  ObterIdVideo(e:any){
+    e.target.value = String(e.target.value).replace("https://www.youtube.com/watch?v=",'');
   }
 
   MapearInputImagemVazioFormGroup(){

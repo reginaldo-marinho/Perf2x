@@ -72,9 +72,15 @@ export class FormConteudoComponent implements OnInit {
       let  DivInputDetalhes = document.createElement("div");
       DivInputDetalhes.setAttribute("class","mb-3 me-1 ms-1");
       return DivInputDetalhes;
-    
   }
   
+  CriarDivInputDetalhesImagem() :Node{
+    let  DivInputDetalhes = document.createElement("div");
+    DivInputDetalhes.setAttribute("class","mb-3 me-1 ms-1");
+    DivInputDetalhes.setAttribute("id",String(document.getElementsByTagName("img").length+1))
+    return DivInputDetalhes;
+  }
+
   CriarElementoDetalheTipoTextArea(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
     let div = this.CriarDivInputDetalhes();
@@ -93,9 +99,8 @@ export class FormConteudoComponent implements OnInit {
   
   CriarElementoDetalheTipoImagem(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
-    let div = this.CriarDivInputDetalhes();
+    let div = this.CriarDivInputDetalhesImagem();
     let Imagem = document.createElement("input");
-
     Imagem.setAttribute("type","file");
     Imagem.setAttribute("class","form-control");
     Imagem.setAttribute("name","imagem");
@@ -108,9 +113,9 @@ export class FormConteudoComponent implements OnInit {
   }
 
   TratarArquivoImagem(event: any){
-    let AreaDeConteudo = document.getElementById("area-de-conteudo")
+    let AreaDeConteudo = document.getElementById(String(document.getElementsByTagName("img").length+1))
     AreaDeConteudo?.appendChild(CriarDivCardImagem())
-     
+
     function CriarDivCardImagem():Node{
       let  DivQuadroInformacao = document.createElement("div");
       DivQuadroInformacao.setAttribute("class","desc-input");

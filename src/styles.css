@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css");
+
+:root{
+    --cor-azul-clarinha: #edf8fb;
+}
 .navbar-bg-green{
     background-color: #44E663 !important;
 }
@@ -17,6 +21,10 @@
 
 .bg-red{
     background-color: #e64444!important;
+}
+
+.bg-azul-claro{
+    background-color: var(--cor-azul-clarinha)!important;
 }
 
 .cur-poi{

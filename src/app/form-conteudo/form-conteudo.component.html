@@ -3,19 +3,19 @@
     <div>
         <h1 class="text-center">Criando uma Nova História </h1>
     </div>
-    <form  autocomplete="off"  [formGroup]="FormConteudo" *ngIf="conteudoHeader || !AlterarConteudo "id = "form-conteudo">
+    <form  autocomplete="off"  [formGroup]="FormConteudo" *ngIf="conteudoHeader || !AlterarConteudo "id = "form-conteudo" class="bg-azul-claro pe-2 ps-2 border" >
         <div class="mb-3" *ngIf="!AlterarConteudo">
             <label for="codigo" class="form-label">Codigo</label>
             <input type="text"  class="form-control" formControlName='codigo' required>
             <div *ngIf="this.FormConteudo.get('codigo')!.errors?.['required']" >
-                <div class="invalid-field-danger color-red mt-1">
+                <div class="invalid-field-danger color-red mt-2">
                     Preenchimento do campo é obrigatório
                 </div>    
             </div>
         </div>
         <div class="mb-3">
             <label for="tipo">Tipo do Conteudo</label>
-            <select  class="form-select" formControlName="nivelConteudo" #NivelDoTitulo>
+            <select  class="form-select " formControlName="nivelConteudo" #NivelDoTitulo>
                 <option *ngFor="let item of ListNivelTituloConteudo" [value]="item.valor" >{{item.nivel}}</option>
             </select>
             <div *ngIf="this.FormConteudo.get('nivelConteudo')!.errors?.['required']">

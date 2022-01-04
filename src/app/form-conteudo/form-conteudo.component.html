@@ -7,9 +7,9 @@
         <div class="mb-3" *ngIf="!AlterarConteudo">
             <label for="codigo" class="form-label">Codigo</label>
             <input type="text"  class="form-control" formControlName='codigo' required>
-            <div *ngIf="this.FormConteudo.get('codigo')!.errors?.['required']">
+            <div *ngIf="this.FormConteudo.get('codigo')!.errors?.['required']" >
                 <div class="invalid-field-danger color-red mt-1">
-                    Preenchimento do campo  é obrigatório
+                    Preenchimento do campo é obrigatório
                 </div>    
             </div>
         </div>
@@ -20,7 +20,7 @@
             </select>
             <div *ngIf="this.FormConteudo.get('nivelConteudo')!.errors?.['required']">
                 <div class="invalid-field-danger color-red mt-1">
-                    Preenchimento do campo  é obrigatório
+                    Preenchimento do campo é obrigatório
                 </div>    
             </div>
         </div>
@@ -40,7 +40,7 @@
             <input type="text"  class="form-control"  formControlName='titulo' required>
             <div *ngIf="this.FormConteudo.get('titulo')!.errors?.['required']">
                 <div class="invalid-field-danger color-red mt-1">
-                    Preenchimento do campo  é obrigatório
+                    Preenchimento do campo é obrigatório
                 </div>    
             </div>
         </div>
@@ -62,9 +62,11 @@
                 </div>
             </div>
             <div class="mb-3">
-                <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto()" title="Adicinar area de texto"></i>
-                <i class="bi bi-images     btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoImagem()" title="Adicinar imagem ao conteudo"></i>
-                <i class="bi bi-youtube    btn-det-cont font-s-30"   (click)="CreateInputeTextLinkYoutube()" ></i>
+                <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto()" title="Adicionar area de texto"></i>
+                <i class="bi bi-images     btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoImagem()" title="Adicionar imagem ao conteudo"></i>
+                <i class="bi bi-youtube    btn-det-cont font-s-30 m-rigth-10" (click)="CreateInputeTextLinkYoutube()" title="Adicionar Id do Youtube" ></i>
+                <i class="bi bi-type-bold  btn-det-cont font-s-30"  title="Transformar Texto em negrito"></i>
+                <i class="bi bi-link-45deg btn-det-cont font-s-30 m-rigth-10"></i>
             </div>
         </div>
         

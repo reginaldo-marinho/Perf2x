@@ -1,3 +1,4 @@
+import { convertActionBinding } from "@angular/compiler/src/compiler_util/expression_converter";
 import {  AfterViewInit, Component, Input, OnInit } from "@angular/core";
 import { FormGroup,FormArray, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -183,7 +184,11 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
       })
     }
 
-    Upload(event:any){
-      this.conteudoService.uploadImagem(event);    
+    Upload(){
+      document.getElementsByName("imagem").forEach(
+        (imagem) => {
+          let img = imagem as HTMLInputElement   
+          this.conteudoService.uploadImagem(img.files?.item(0) as File);
+      })
     }
 }

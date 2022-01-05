@@ -41,9 +41,9 @@ export class ConteudoService{
     deleteConteudo(id: number|string ): Observable<any>{
         return this.http.delete<any>( `${this.configUrl}/${id}`);
     }
-    uploadImagem(event:any):Observable<any>{
+    uploadImagem(file:File):Observable<any>{
         const formData = new FormData();
-        formData.append("imagem",event.target.files[0]);
+        formData.append("thumbnail",file);
         
         return this.http.post(`${this.configUrl}/upload/`,FormData);  
 

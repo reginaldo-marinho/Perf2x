@@ -37,6 +37,9 @@ export class FormConteudoComponent implements OnInit {
     conteudoDatalhes: this.fb.array([this.fb.group({texto:[]})])
   })
   
+  get getCodigoConteudoEncontrado(): string{
+    return this.ConteudoHeaderEncontrado!.codigo;
+  }
   get conteudoDatalhesForm():FormArray{
      return this.FormConteudo.get('conteudoDatalhes') as FormArray 
   }
@@ -223,7 +226,7 @@ export class FormConteudoComponent implements OnInit {
     this.conteudoHeader.nivelConteudo = Number(this.FormConteudo.get('nivelConteudo')?.value);
     this.conteudoHeader.titulo        = String(this.FormConteudo.get('titulo')?.value);
     this.conteudoHeader.posicao       = Number(this.FormConteudo.get('posicao')?.value);
-    this.conteudoHeader.conteudoPai!  = this.ConteudoHeaderEncontrado!.codigo;
+    this.ConteudoHeaderEncontrado! == undefined ? this.conteudoHeader.conteudoPai = '' : this.conteudoHeader.conteudoPai = this.ConteudoHeaderEncontrado!.codigo;
     this.conteudoHeader.conteudoDatalhes = this.CriarListaDetalhe(this.conteudoHeader);
     return this.conteudoHeader;
   }
@@ -256,8 +259,7 @@ export class FormConteudoComponent implements OnInit {
     });
   }
 
-  SalvarConteudo(FormConteudo: any){
-       console.log(FormConteudo) 
+  SalvarConteudo(FormConteudo: any){ 
        this.conteudoHeader = this.TransferirFormConteudoParaObjeto();
        this.louder.OpenLoader();
        this.conteudoService.saveConteudo(this.conteudoHeader).subscribe(      

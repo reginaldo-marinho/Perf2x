@@ -14,6 +14,6 @@ export class LoaderService{
             var loader = document.getElementById("quadro-fundo-loader");
             loader?.classList.remove("quadro-fundo");
             loader?.classList.add("display-none");
-        },1500)
+        },1000)
     }
 }

@@ -1,4 +1,4 @@
-import {  Component, Input, OnInit } from "@angular/core";
+import {  AfterViewInit, Component, Input, OnInit } from "@angular/core";
 import { FormGroup,FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { LoaderService } from "../shared/Loader/loader.service";
@@ -9,16 +9,18 @@ import { ConteudoService } from "./conteudo.service";
     templateUrl:'./form-conteudo.component.html',
     styleUrls:['./form-conteudo.component.css']
 })
-export class FormConteudoComponent implements OnInit {
+export class FormConteudoComponent implements OnInit,AfterViewInit{
 
   constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService){  }
   ngOnInit(){
+
       if (this.activatedRoute.snapshot.paramMap.get("codconteudo") != null){
           this.AlterarConteudo = true
           this.GetConteudoById(String(this.activatedRoute.snapshot.paramMap.get("codconteudo")))
       }
-      
-      this.CreateListConteudoHeader();
+  }
+  ngAfterViewInit(){
+    this.CriarElementoDetalheTipoTextArea()  
   }
 
   AlterarConteudo   : boolean = false;
@@ -36,6 +38,7 @@ export class FormConteudoComponent implements OnInit {
     posicao: ['', Validators.required],
     conteudoDatalhes: this.fb.array([this.fb.group({texto:[]})])
   })
+  
   
   get getCodigoConteudoEncontrado(): string{
     return this.ConteudoHeaderEncontrado!.codigo;
@@ -260,6 +263,8 @@ export class FormConteudoComponent implements OnInit {
   }
 
   SalvarConteudo(FormConteudo: any){ 
+
+      console.log(FormConteudo)
        this.conteudoHeader = this.TransferirFormConteudoParaObjeto();
        this.louder.OpenLoader();
        this.conteudoService.saveConteudo(this.conteudoHeader).subscribe(      

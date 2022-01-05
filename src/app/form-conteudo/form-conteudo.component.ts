@@ -2,7 +2,6 @@ import {  AfterViewInit, Component, Input, OnInit } from "@angular/core";
 import { FormGroup,FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { LoaderService } from "../shared/Loader/loader.service";
-
 import { ConteudoDatalhes, ConteudoHeader } from "./conteudo-header";
 import { ConteudoService } from "./conteudo.service";
 @Component({
@@ -298,5 +297,5 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
               console.log("Conteudo Excluido");
           }
       })
-  }
+    }
 }

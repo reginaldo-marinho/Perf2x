@@ -4,6 +4,7 @@
 
 :root{
     --cor-azul-form-clarinha: #edf8fb;
+    --cor-vermelho-padrao: #f00;
 }
 .navbar-bg-green{
     background-color: #44E663 !important;
@@ -82,3 +83,6 @@ body{
   }
 
   
+  .color-red{
+      color: var(--cor-vermelho-padrao);
+  }

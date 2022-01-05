@@ -147,7 +147,7 @@ export class FormConteudoComponent implements OnInit {
 
     function CriarDivDetalhesImagem(){
       let  DivDescricaoImagem = document.createElement("div");
-      DivDescricaoImagem.setAttribute("class","desc-input-img-details");
+      DivDescricaoImagem.setAttribute("class","desc-input-img-details border");
       DivDescricaoImagem.appendChild(CriarListDescricaoImagem()!);
       return DivDescricaoImagem;
     }
@@ -165,7 +165,6 @@ export class FormConteudoComponent implements OnInit {
     }
   }
   
-
   CreateInputeTextLinkYoutube(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
     let TexYoutube = document.createElement("input");

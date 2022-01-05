@@ -60,7 +60,7 @@ body{
 
 .desc-input-img-details{
     display: flex;
-    border: 1px solid;
+    border-radius:0px 5px 5px 0px  ;
     width: 100%;
     align-items: center;
 }

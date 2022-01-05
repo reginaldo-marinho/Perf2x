@@ -1,5 +1,5 @@
 import {  AfterViewInit, Component, Input, OnInit } from "@angular/core";
-import { FormGroup,FormArray, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup,FormArray, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { LoaderService } from "../shared/Loader/loader.service";
 import { ConteudoDatalhes, ConteudoHeader } from "./conteudo-header";
@@ -28,7 +28,7 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
   @Input() conteudoHeader!: ConteudoHeader;
-
+ 
   FormConteudo = this.fb.group({
     codigo:  ['', Validators.required],
     nivelConteudo:['',Validators.required],
@@ -38,10 +38,6 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     conteudoDatalhes: this.fb.array([this.fb.group({texto:[]})])
   })
   
-  
-  get getCodigoConteudoEncontrado(): string{
-    return this.ConteudoHeaderEncontrado!.codigo;
-  }
   get conteudoDatalhesForm():FormArray{
      return this.FormConteudo.get('conteudoDatalhes') as FormArray 
   }
@@ -133,7 +129,6 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
       let AreaDeConteudoNovo = document.getElementById(IdNovoElemento)
       AreaDeConteudoNovo?.appendChild(CriarDivCardImagem(IdNovoElemento))
     }
-
     function CriarDivCardImagem(posicaoId:string):Node{
       let  DivQuadroInformacao = document.createElement("div");
       DivQuadroInformacao.setAttribute("class","desc-input");
@@ -192,7 +187,7 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   MapearInputImagemVazioFormGroup(){
     this.conteudoDatalhesForm.push(
       this.fb.group({
-      imagem: ['']
+      imagem:[]
       })
     );
   }
@@ -262,13 +257,11 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   }
 
   SalvarConteudo(FormConteudo: any){ 
-
-      console.log(FormConteudo)
        this.conteudoHeader = this.TransferirFormConteudoParaObjeto();
        this.louder.OpenLoader();
        this.conteudoService.saveConteudo(this.conteudoHeader).subscribe(      
         {
-          next:(conteudo:ConteudoHeader) => {
+          next:() => {
           },
           error: err => {
           }
@@ -297,5 +290,9 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
               console.log("Conteudo Excluido");
           }
       })
+    }
+
+    Upload(event:any){
+      this.conteudoService.uploadImagem(event);    
     }
 }

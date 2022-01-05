@@ -90,6 +90,7 @@ export class FormConteudoComponent implements OnInit {
     function CriarTextArea():Node {
       let TextArea = document.createElement("textarea");
       TextArea.setAttribute("class","form-control");
+      TextArea.setAttribute("id","textarea-conteudo")
       TextArea.setAttribute("name","imagem");
       TextArea.setAttribute("formControlName","texto");
       TextArea.setAttribute("style","height: 200px;");
@@ -147,9 +148,23 @@ export class FormConteudoComponent implements OnInit {
     function CriarDivDetalhesImagem(){
       let  DivDescricaoImagem = document.createElement("div");
       DivDescricaoImagem.setAttribute("class","desc-input-img-details");
+      DivDescricaoImagem.appendChild(CriarListDescricaoImagem()!);
       return DivDescricaoImagem;
     }
+    function CriarListDescricaoImagem(){
+      let ul = document.createElement("ul")
+      ul.setAttribute("style","list-style: none; margin-bottom: 0px");
+      let TamanhoImagem = document.createElement("li");
+      let UltimaModific = document.createElement("li");
+      TamanhoImagem.textContent = `Tamanho: ${event.target.files[0].size} bytes`
+      UltimaModific.textContent = `Ultima Modificação:${event.target.files[0].lastModifiedDate}`
+
+      ul.appendChild(TamanhoImagem)
+      ul.appendChild(UltimaModific)
+      return ul;
+    }
   }
+  
 
   CreateInputeTextLinkYoutube(){
     let AreaDeConteudo = document.getElementById("area-de-conteudo")
@@ -169,6 +184,7 @@ export class FormConteudoComponent implements OnInit {
   ObterIdVideo(e:any){
     e.target.value = String(e.target.value).replace("https://www.youtube.com/watch?v=",'');
   }
+
   MapearInputImagemVazioFormGroup(){
     this.conteudoDatalhesForm.push(
       this.fb.group({
@@ -212,6 +228,7 @@ export class FormConteudoComponent implements OnInit {
     this.conteudoHeader.conteudoDatalhes = this.CriarListaDetalhe(this.conteudoHeader);
     return this.conteudoHeader;
   }
+
 
   CriarListaDetalhe(conteudoHeader:ConteudoHeader):ConteudoDatalhes[]{
     var detalhe  = new ConteudoDatalhes();

@@ -59,8 +59,10 @@ body{
 }
 
 .desc-input-img-details{
+    display: flex;
     border: 1px solid;
     width: 100%;
+    align-items: center;
 }
 
 .button-anymate{
@@ -78,3 +80,5 @@ body{
   .button-anymate:hover{
    background-color: #64d3f5;
   }
+
+  

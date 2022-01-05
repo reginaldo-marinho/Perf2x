@@ -69,11 +69,10 @@
                 <i class="bi bi-link-45deg btn-det-cont font-s-30 m-rigth-10"></i>
             </div>
         </div>
-        
-        <button type="submit" class="btn bg-blue me-1" (click)="SalvarConteudo(FormConteudo)"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>
-        <button type="submit" class="btn bg-blue me-1" (click)="update(FormConteudo.value)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}"> Alterar <i class="bi bi-pencil-fill"></i></button>
-        <button type="submit" class="btn bg-blue me-1" (click)="delete(conteudoHeader.codigo)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}" >Excluir <i class="bi bi-trash"></i></button> 
-        <a class="btn navbar-bg-green bg-yellow" [routerLink]="['/menu-brazukas']" routerLinkActive="router-link-active" >Voltar <i class="bi bi-arrow-left"></i></a>
+        <button type="submit" class="button-anymate me-1" (click)="SalvarConteudo(FormConteudo)"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>
+        <button type="submit" class="button-anymate me-1" (click)="update(FormConteudo.value)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}"> Alterar <i class="bi bi-pencil-fill"></i></button>
+        <button type="submit" class="button-anymate me-1" (click)="delete(conteudoHeader.codigo)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}" >Excluir <i class="bi bi-trash"></i></button> 
+        <button class="button-anymate" [routerLink]="['/menu-brazukas']" routerLinkActive="router-link-active" >Voltar</button> 
     </form>
 </div>
 <app-loader></app-loader>

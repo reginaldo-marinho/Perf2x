@@ -1,13 +1,18 @@
- <nav id="menu" class="menu menu-desktop">
-    <div style="display:flex;">
-        <a href="" class="menu-item-lin">Brazukas</a>
-    </div>
-    <div class="icone-list-menu" (click)="OpenMenuMobile()">
-        <i class="bi bi-list"></i>
-    </div>
-    <div id="menu-item" >
-        <li  [routerLink]="['/tema-ensino']" routerLinkActive="router-link-active"  class="menu-item-lin">Temas de Ensino</li>
-        <li  [routerLink]="['/ulti-posts']" routerLinkActive="router-link-active"  class="menu-item-lin">Conteudos</li>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <nav class="menu-nav-bar">
+    <a href="" class="menu-btn">Brazukas</a>
+    <div class="drop-down">
+        <button class="menu-btn">Conteudos</button>
+        <div class="drop-down-item">
+            <a  [routerLink]="['/tema-ensino']" routerLinkActive="router-link-active" >Temas de Ensino</a>
+            <a  [routerLink]="['/ulti-posts']" routerLinkActive="router-link-active" >Cadastros de Conteudos</a>
+        </div>
     </div>
 </nav>
 <hr class="line-rgb" style="margin-top: 0px; opacity: 100;">

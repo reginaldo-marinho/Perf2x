@@ -185,10 +185,12 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     }
 
     Upload(){
-      document.getElementsByName("imagem").forEach(
+        this.conteudoService.uploadImagem();
+       document.getElementsByName("imagem").forEach(
         (imagem) => {
-          let img = imagem as HTMLInputElement   
-          this.conteudoService.uploadImagem(img.files?.item(0) as File);
+          let img = imagem as HTMLInputElement
+          let file = img.files?.item(0) as File
+         // this.conteudoService.uploadImagem(file);
       })
     }
 }

@@ -41,14 +41,11 @@ export class ConteudoService{
     deleteConteudo(id: number|string ): Observable<any>{
         return this.http.delete<any>( `${this.configUrl}/${id}`);
     }
-    uploadImagem(file:File):Observable<any>{
-        const formData = new FormData();
-        formData.append("thumbnail",file);
-        
-        return this.http.post(`${this.configUrl}/upload/`,FormData);  
-
+    uploadImagem():Observable<any>{
+        const frmData = new FormData();
+        //frmData.append("imagem",file); 
+        return this.http.post(`${this.configUrl}/upload/`,frmData);
     }
-
 }
 
 

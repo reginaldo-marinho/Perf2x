@@ -86,3 +86,7 @@ body{
   .color-red{
       color: var(--cor-vermelho-padrao);
   }
+
+  .font-s-30{
+    font-size: 30px;
+}

@@ -19,6 +19,8 @@
     text-decoration: none;
     color: black;
     border: none;
+    background-color: #9de4fa;
+    
 }
 .menu-btn{
     padding: 10px 20px 10px 20px;
@@ -28,10 +30,16 @@
     text-decoration: none;
     padding: 5px 10px 5px 10px;
     color: black;
+    background-color: #fff;
 }
 
+.drop-down-item a:hover{
+    background-color: rgb(212, 238, 245);
+}
 
-
+.icone-btn{
+    margin-left: 5px;
+}
 
 
 

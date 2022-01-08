@@ -1,78 +1,82 @@
 <message-box></message-box>
-<div class="mt-4 mb-5">
-    <div>
-        <h1 class="text-center">Criando uma Nova História </h1>
-    </div>
-    <form  autocomplete="off"  [formGroup]="FormConteudo" *ngIf="conteudoHeader || !AlterarConteudo "id = "form-conteudo" class="bg-azul-claro pe-2 ps-2 border" >
-        <div class="mb-3" *ngIf="!AlterarConteudo">
-            <label for="codigo" class="form-label">Codigo</label>
-            <input type="text"  class="form-control" formControlName='codigo' required>
-            <div *ngIf="this.FormConteudo.get('codigo')!.errors?.['required']" >
-                <div class="invalid-field-danger color-red mt-2">
-                    Preenchimento do campo é obrigatório
-                </div>    
-            </div>
+<div class="conteiner-conteudo"> 
+    <div class="mt-4 mb-5">
+        <div>
+            <h1 class="text-center">Criando uma Nova História </h1>
         </div>
-        <div class="mb-3">
-            <label for="tipo">Tipo do Conteudo</label>
-            <select  class="form-select " formControlName="nivelConteudo" #NivelDoTitulo>
-                <option *ngFor="let item of ListNivelTituloConteudo" [value]="item.valor" >{{item.nivel}}</option>
-            </select>
-            <div *ngIf="this.FormConteudo.get('nivelConteudo')!.errors?.['required']">
-                <div class="invalid-field-danger color-red mt-1">
-                    Preenchimento do campo é obrigatório
-                </div>    
-            </div>
-        </div>
-        <div *ngIf="NivelDoTitulo.value > '1'">
-            <div class="mb-3">
-                <label for="tipo">Conteudo Pai</label>
-                <input type="text"  (keyup)="GetConteudoPai($event)" class="form-control" formControlName="conteudoPai">
-            </div>
-            <div class="mb-3">
-                <label for="">Conteudo Encontrado: </label>
-                <strong>{{ConteudoHeaderEncontrado?.titulo}}</strong>
-            </div>    
-        </div>
-
-        <div class="mb-3">
-            <label for="Titulo" class="form-label">Titulo</label>
-            <input type="text"  class="form-control"  formControlName='titulo' required>
-            <div *ngIf="this.FormConteudo.get('titulo')!.errors?.['required']">
-                <div class="invalid-field-danger color-red mt-1">
-                    Preenchimento do campo é obrigatório
-                </div>    
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="Posicao" class="form-label">Posicao</label>
-            <input type="number" class="form-control" formControlName='posicao' required>
-            <div *ngIf="this.FormConteudo.get('posicao')!.errors?.['required']">
-                <div class="invalid-field-danger color-red mt-1">
-                    Preenchimento do campo  é obrigatório
-                </div>    
-            </div>
-        </div>
-        <div class="rounded mb-3">
-           <div formArrayName="conteudoDatalhes">
-                <div *ngFor="let detalhe of conteudoDatalhesForm.controls; index as posicao">
-                    <div [formGroupName]="posicao" id="area-de-conteudo" >
-
-                    </div> 
+        <form  autocomplete="off"  [formGroup]="FormConteudo" *ngIf="conteudoHeader || !AlterarConteudo "id = "form-conteudo" class="pe-2 ps-2 border" >
+            <div class="mb-3" *ngIf="!AlterarConteudo">
+                <label for="codigo" class="form-label">Codigo</label>
+                <input type="text"  class="form-control" formControlName='codigo' required>
+                <div *ngIf="this.FormConteudo.get('codigo')!.errors?.['required']" >
+                    <div class="invalid-field-danger color-red mt-2">
+                        Preenchimento do campo é obrigatório
+                    </div>    
                 </div>
             </div>
             <div class="mb-3">
-                <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto()" title="Adicionar area de texto"></i>
-                <i class="bi bi-images     btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoImagem()" title="Adicionar imagem ao conteudo"></i>
-                <i class="bi bi-youtube    btn-det-cont font-s-30 m-rigth-10 color-red" (click)="CreateInputeTextLinkYoutube()" title="Adicionar Id do Youtube" ></i>
-                <i class="bi bi-type-bold  btn-det-cont font-s-30" (click) = "Upload()" title="Transformar Texto em negrito"></i>
-                <i class="bi bi-link-45deg btn-det-cont font-s-30 m-rigth-10"></i>
+                <label for="tipo">Tipo do Conteudo</label>
+                <select  class="form-select " formControlName="nivelConteudo" #NivelDoTitulo>
+                    <option *ngFor="let item of ListNivelTituloConteudo" [value]="item.valor" >{{item.nivel}}</option>
+                </select>
+                <div *ngIf="this.FormConteudo.get('nivelConteudo')!.errors?.['required']">
+                    <div  class="invalid-field-danger color-red mt-1">
+                        Preenchimento do campo é obrigatório
+                    </div>    
+                </div>
             </div>
+            <div *ngIf="NivelDoTitulo.value > '1'">
+                <div class="mb-3">
+                    <label for="tipo">Conteudo Pai</label>
+                    <input type="text"  (keyup)="GetConteudoPai($event)" class="form-control" formControlName="conteudoPai">
+                </div>
+                <div class="mb-3">
+                    <label for="">Conteudo Encontrado: </label>
+                    <strong>{{ConteudoHeaderEncontrado?.titulo}}</strong>
+                </div>    
+            </div>
+
+            <div class="mb-3">
+                <label for="Titulo" class="form-label">Titulo</label>
+                <input type="text"  class="form-control"  formControlName='titulo' required>
+                <div *ngIf="this.FormConteudo.get('titulo')!.errors?.['required']">
+                    <div class="invalid-field-danger color-red mt-1">
+                        Preenchimento do campo é obrigatório
+                    </div>    
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="Posicao" class="form-label">Posicao</label>
+                <input type="number" class="form-control" formControlName='posicao' required>
+                <div *ngIf="this.FormConteudo.get('posicao')!.errors?.['required']">
+                    <div class="invalid-field-danger color-red mt-1">
+                        Preenchimento do campo  é obrigatório
+                    </div>    
+                </div>
+            </div>
+            <div class="rounded mb-3">
+            <div formArrayName="conteudoDatalhes">
+                    <div *ngFor="let detalhe of conteudoDatalhesForm.controls; index as posicao">
+                        <div [formGroupName]="posicao" id="area-de-conteudo" >
+
+                        </div> 
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto()" title="Adicionar area de texto"></i>
+                    <i class="bi bi-images     btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoImagem()" title="Adicionar imagem ao conteudo"></i>
+                    <i class="bi bi-youtube    btn-det-cont font-s-30 m-rigth-10 color-red" (click)="CreateInputeTextLinkYoutube()" title="Adicionar Id do Youtube" ></i>
+                    <i class="bi bi-type-bold  btn-det-cont font-s-30" (click) = "Upload()" title="Transformar Texto em negrito"></i>
+                    <i class="bi bi-link-45deg btn-det-cont font-s-30 m-rigth-10"></i>
+                </div>
+            </div>
+        </form>
+        <div class="btn-vertical">
+            <button type="submit" class="button-anymate me-1" (click)="SalvarConteudo(FormConteudo)"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>
+            <button type="submit" class="button-anymate me-1" (click)="update(FormConteudo.value)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}"> Alterar <i class="bi bi-pencil-fill"></i></button>
+            <button type="submit" class="button-anymate me-1" (click)="delete(conteudoHeader.codigo)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}" >Excluir <i class="bi bi-trash"></i></button> 
+            <button class="button-anymate" [routerLink]="['/menu-brazukas']" routerLinkActive="router-link-active" >Voltar</button> 
         </div>
-        <button type="submit" class="button-anymate me-1" (click)="SalvarConteudo(FormConteudo)"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>
-        <button type="submit" class="button-anymate me-1" (click)="update(FormConteudo.value)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}"> Alterar <i class="bi bi-pencil-fill"></i></button>
-        <button type="submit" class="button-anymate me-1" (click)="delete(conteudoHeader.codigo)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}" >Excluir <i class="bi bi-trash"></i></button> 
-        <button class="button-anymate" [routerLink]="['/menu-brazukas']" routerLinkActive="router-link-active" >Voltar</button> 
-    </form>
+    </div>
 </div>
 <app-loader></app-loader>

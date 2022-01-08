@@ -1,3 +1,7 @@
+.conteiner-conteudo{
+    display: block;
+}
+
 .closebtn{
     float: right;
     margin-left: 15px;

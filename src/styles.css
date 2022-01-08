@@ -90,3 +90,7 @@ body{
   .font-s-30{
     font-size: 30px;
 }
+
+.container-main{
+    margin: 10px;
+}

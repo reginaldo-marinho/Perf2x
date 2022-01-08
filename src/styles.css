@@ -67,11 +67,14 @@ body{
 }
 
 .button-anymate{
+    display: block !important;
     background-color: #9de4fa;
     border: none;
     padding: 8px 16px;
     border-radius: 10px;
     box-shadow: 2px 6px #bdbdbd ;
+    min-width: 150px;
+    margin: 0px 0px 10px 0px;
   }
   .button-anymate:active{
     transform: translateY(3px);
@@ -93,4 +96,9 @@ body{
 
 .container-main{
     margin: 10px;
+    
+}
+
+.btn-vertical{
+    max-width: 150px;
 }

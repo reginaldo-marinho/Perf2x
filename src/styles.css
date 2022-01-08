@@ -15,7 +15,6 @@ body::-webkit-scrollbar{
 body::-webkit-scrollbar-thumb {
     background-color: #cacaca; 
     border-radius: 10px;         
-    border: 1px solid; 
   }
 
 .navbar-bg-green{

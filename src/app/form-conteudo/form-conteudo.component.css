@@ -21,3 +21,17 @@
 .width-90pc{
     width: 90% ;
 }
+
+.detalhe-conteudo{
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+.detalhe-conteudo::-webkit-scrollbar{
+    width: 10px;
+}
+.detalhe-conteudo::-webkit-scrollbar-thumb {
+    background-color: #9de4fa;    
+    border-radius: 20px;        
+  }
+

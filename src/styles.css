@@ -7,6 +7,17 @@
     --cor-azul-form-clarinha: #edf8fb;
     --cor-vermelho-padrao: #f00;
 }
+
+body::-webkit-scrollbar{
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #cacaca; 
+    border-radius: 10px;         
+    border: 1px solid; 
+  }
+
 .navbar-bg-green{
     background-color: #44E663 !important;
 }

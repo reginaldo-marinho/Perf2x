@@ -18,6 +18,6 @@
     cursor: pointer;
 }
 
-.max-width-90pc{
-    max-width: 90% !important;
+.width-90pc{
+    width: 90% ;
 }

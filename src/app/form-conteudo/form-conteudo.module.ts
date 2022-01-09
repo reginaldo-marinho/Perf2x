@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormConteudoComponent } from "./form-conteudo.component";
 import { MensagemBoxComponent } from "../shared/mensagem-box/mensagem-box.component";
 import { LoaderComponent } from "../shared/Loader/loader.component";
+import { BotoesCrudComponent } from "../core/botoes-crud/botoes-crud.component";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { LoaderComponent } from "../shared/Loader/loader.component";
         FormConteudoComponent,
         LoaderComponent,
         MensagemBoxComponent,
+        BotoesCrudComponent
     ],
     exports:[FormConteudoComponent] 
 

@@ -72,6 +72,15 @@
             </form>
         </div>
         <app-botoes-crud></app-botoes-crud>
+        <!--
+        <div class="btn-vertical">
+            <button type="submit" class="button-anymate me-1"    [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Novo</button>
+            <button type="submit" class="button-anymate me-1" (click)="SalvarConteudo(FormConteudo)"   [ngClass]="{disabled: FormConteudo.invalid || AlterarConteudo}">Adicionar <i class="bi bi-patch-plus"></i></button>
+            <button type="submit" class="button-anymate me-1" (click)="update(FormConteudo.value)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}"> Alterar <i class="bi bi-pencil-fill"></i></button>
+            <button type="submit" class="button-anymate me-1" (click)="delete(conteudoHeader.codigo)" [ngClass]="{disabled: FormConteudo.invalid || !AlterarConteudo}" >Excluir <i class="bi bi-trash"></i></button> 
+            <button class="button-anymate" [routerLink]="['/menu-brazukas']" routerLinkActive="router-link-active" >Voltar</button> 
+        </div>
+        -->
     </div>
     </div>
 <app-loader></app-loader>

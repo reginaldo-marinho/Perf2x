@@ -19,7 +19,13 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
           this.AlterarConteudo = true
           this.GetConteudoById(String(this.activatedRoute.snapshot.paramMap.get("codconteudo")))
       }
+      this.CarregarEventosBtnCrud()
   }
+
+  CarregarEventosBtnCrud(){
+    document.getElementById("btn-adicionar")?.addEventListener("click",() => this.Salvar());
+  }
+
   ngAfterViewInit(){
     this.HTMLDinamico.CriarElementoDetalheTipoTextArea()  
   }
@@ -106,12 +112,11 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     var detalhe  = new ConteudoDatalhes();
     var listaDetalhes = new Array() ;
     this.conteudoDatalhesForm.getRawValue().forEach(function(_conteudo,indice) {
-      console.log(_conteudo)
       detalhe.codigo = conteudoHeader.codigo;
-      detalhe.codigoHeader = detalhe.codigo;
+      detalhe.codigoHeader = conteudoHeader.codigo;
       detalhe.texto = _conteudo["texto"];
       detalhe.linha = indice+1
-      listaDetalhes.push(_conteudo )
+      listaDetalhes.push(detalhe )
     })
     return  listaDetalhes;
   }
@@ -130,7 +135,7 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     });
   }
 
-  SalvarConteudo(FormConteudo: any){ 
+  Salvar(){ 
        this.conteudoHeader = this.TransferirFormConteudoParaObjeto();
        this.louder.OpenLoader();
        this.conteudoService.saveConteudo(this.conteudoHeader).subscribe(      

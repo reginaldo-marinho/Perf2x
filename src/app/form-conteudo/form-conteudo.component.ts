@@ -158,6 +158,7 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
           error: err => {
           }
         })
+        this.Upload();
         this.louder.CloseLoader();
   }
 
@@ -185,12 +186,11 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     }
 
     Upload(){
-        this.conteudoService.uploadImagem();
        document.getElementsByName("imagem").forEach(
         (imagem) => {
           let img = imagem as HTMLInputElement
           let file = img.files?.item(0) as File
-         // this.conteudoService.uploadImagem(file);
+          this.conteudoService.uploadImagem(file);
       })
     }
 }

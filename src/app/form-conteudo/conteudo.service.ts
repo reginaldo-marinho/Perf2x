@@ -41,10 +41,10 @@ export class ConteudoService{
     deleteConteudo(id: number|string ): Observable<any>{
         return this.http.delete<any>( `${this.configUrl}/${id}`);
     }
-    uploadImagem():Observable<any>{
-        const frmData = new FormData();
-        //frmData.append("imagem",file); 
-        return this.http.post(`${this.configUrl}/upload/`,frmData);
+    uploadImagem(Imagem:File):void{
+        const frmData:FormData = new FormData();
+        frmData.append("imagem",Imagem!); 
+        this.http.post<FormData>(`${this.configUrl}/upload/`,frmData).subscribe();
     }
 }
 

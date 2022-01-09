@@ -1,6 +1,5 @@
-import { convertActionBinding } from "@angular/compiler/src/compiler_util/expression_converter";
 import {  AfterViewInit, Component, Input, OnInit } from "@angular/core";
-import { FormGroup,FormArray, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { LoaderService } from "../shared/Loader/loader.service";
 import { ConteudoDatalhes, ConteudoHeader } from "./conteudo-header";
@@ -10,6 +9,7 @@ import { ElementoConteudoService } from "./elemento-conteudo.service";
     templateUrl:'./form-conteudo.component.html',
     styleUrls:['./form-conteudo.component.css']
 })
+
 export class FormConteudoComponent implements OnInit,AfterViewInit{
 
   constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService, private HTMLDinamico: ElementoConteudoService){  }
@@ -37,34 +37,16 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     conteudoPai:  [''], 
     titulo:  ['', Validators.required],
     posicao: ['', Validators.required],
-    conteudoDatalhes: this.fb.array([this.fb.group({texto:[]})])
+    conteudoDatalhes: this.fb.array([this.fb.group({texto:['',Validators.required]})])
   })
   
   get conteudoDatalhesForm():FormArray{
      return this.FormConteudo.get('conteudoDatalhes') as FormArray 
   }
 
-  AdicionarNovoDetalheVazio(){
-    var DetalheGroup:FormGroup;
-    DetalheGroup = this.fb.group({
-        texto: ['', Validators.required],
-        imagem: ['']
-    })
-    this.conteudoDatalhesForm.push(DetalheGroup!);
-  }
-
-  AdicionarNovoDetalheComValor(detalhe: ConteudoDatalhes){
-    var DetalheGroup:FormGroup;
-    DetalheGroup = this.fb.group({
-      texto: [detalhe.texto],
-      imagem: []
-    })
-    this.conteudoDatalhesForm.push(DetalheGroup!);
-  }
-  
   CriarElementoTexto(){
-    this.HTMLDinamico.CriarElementoDetalheTipoTextArea();
     this.MapearTextAreaTextoVazioFormGroup();
+    this.HTMLDinamico.CriarElementoDetalheTipoTextArea();
   }
 
   CriarElementoImagem(){
@@ -79,14 +61,14 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   MapearInputImagemVazioFormGroup(){
     this.conteudoDatalhesForm.push(
       this.fb.group({
-      imagem:[]
+      imagem:['', Validators.required]
       })
     );
   }
   MapearTextAreaTextoVazioFormGroup(){
     this.conteudoDatalhesForm.push(
       this.fb.group({
-        texto: []
+        texto: ['', Validators.required]
       })
     );
   }
@@ -106,7 +88,7 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     this.FormConteudo.get('nivelConteudo')?.setValue(this.conteudoHeader.nivelConteudo)
     this.FormConteudo.get('titulo')?.setValue(this.conteudoHeader.titulo)
     this.FormConteudo.get('posicao')?.setValue(this.conteudoHeader.posicao)
-    this.conteudoHeader.conteudoDatalhes!.forEach( detalhe => this.AdicionarNovoDetalheComValor(detalhe))
+    //this.conteudoHeader.conteudoDatalhes!.forEach( detalhe => this.AdicionarNovoDetalheComValor(detalhe))
   }
 
   TransferirFormConteudoParaObjeto(): ConteudoHeader{
@@ -120,16 +102,16 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     return this.conteudoHeader;
   }
 
-
   CriarListaDetalhe(conteudoHeader:ConteudoHeader):ConteudoDatalhes[]{
     var detalhe  = new ConteudoDatalhes();
     var listaDetalhes = new Array() ;
-    this.conteudoDatalhesForm.getRawValue().forEach(function(conteudoDetalhe,indice) {
+    this.conteudoDatalhesForm.getRawValue().forEach(function(_conteudo,indice) {
+      console.log(_conteudo)
       detalhe.codigo = conteudoHeader.codigo;
-      detalhe.codigoHeader = conteudoHeader.codigo;
-      detalhe.texto = conteudoDetalhe["texto"];
+      detalhe.codigoHeader = detalhe.codigo;
+      detalhe.texto = _conteudo["texto"];
       detalhe.linha = indice+1
-      listaDetalhes.push(detalhe)
+      listaDetalhes.push(_conteudo )
     })
     return  listaDetalhes;
   }

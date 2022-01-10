@@ -17,7 +17,7 @@ export class ConteudoDatalhes{
     }
     codigo! :string;
     texto! :string;
-    imagem?:Byte;
+    imagem!:string;
     codigoHeader!:string;
     linha! :number;
 }

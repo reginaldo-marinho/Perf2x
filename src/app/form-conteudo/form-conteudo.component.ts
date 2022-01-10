@@ -47,6 +47,7 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   })
   
   get conteudoDatalhesForm():FormArray{
+    console.log(this.FormConteudo.get('conteudoDatalhes')?.get("texto"))
      return this.FormConteudo.get('conteudoDatalhes') as FormArray 
   }
 
@@ -105,12 +106,16 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     this.conteudoHeader.posicao       = Number(this.FormConteudo.get('posicao')?.value);
     this.ConteudoHeaderEncontrado! == undefined ? this.conteudoHeader.conteudoPai = '' : this.conteudoHeader.conteudoPai = this.ConteudoHeaderEncontrado!.codigo;
     this.conteudoHeader.conteudoDatalhes = this.CriarListaDetalhe(this.conteudoHeader);
+
+    console.log(this.FormConteudo)
+
     return this.conteudoHeader;
   }
 
   CriarListaDetalhe(conteudoHeader:ConteudoHeader):ConteudoDatalhes[]{
     var detalhe  = new ConteudoDatalhes();
     var listaDetalhes = new Array() ;
+    
     this.conteudoDatalhesForm.getRawValue().forEach(function(_conteudo,indice) {
       detalhe.codigo = conteudoHeader.codigo;
       detalhe.codigoHeader = conteudoHeader.codigo;

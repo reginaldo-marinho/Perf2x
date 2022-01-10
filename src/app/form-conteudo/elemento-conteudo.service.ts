@@ -16,7 +16,6 @@ export class ElementoConteudoService{
         function CriarTextArea():Node {
           let TextArea = document.createElement("textarea");
           TextArea.setAttribute("class","form-control");
-          TextArea.setAttribute("id","textarea-conteudo")
           TextArea.setAttribute("name","texto");
           TextArea.setAttribute("formControlName","texto");
           TextArea.setAttribute("style","height: 200px;");

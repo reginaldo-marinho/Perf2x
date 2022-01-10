@@ -47,7 +47,6 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   })
   
   get conteudoDatalhesForm():FormArray{
-    console.log(this.FormConteudo.get('conteudoDatalhes')?.get("texto"))
      return this.FormConteudo.get('conteudoDatalhes') as FormArray 
   }
 

@@ -10,7 +10,7 @@ import { ElementoConteudoService } from "./elemento-conteudo.service";
     styleUrls:['./form-conteudo.component.css']
 })
 
-export class FormConteudoComponent implements OnInit,AfterViewInit{
+export class FormConteudoComponent implements OnInit{
 
   constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService, private HTMLDinamico: ElementoConteudoService){  }
   ngOnInit(){
@@ -20,14 +20,11 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
           this.GetConteudoById(String(this.activatedRoute.snapshot.paramMap.get("codconteudo")))
       }
       this.CarregarEventosBtnCrud()
+      
   }
 
   CarregarEventosBtnCrud(){
     document.getElementById("btn-adicionar")?.addEventListener("click",() => this.Salvar());
-  }
-
-  ngAfterViewInit(){
-    this.HTMLDinamico.CriarElementoDetalheTipoTextArea()  
   }
 
   AlterarConteudo   : boolean = false;
@@ -36,52 +33,41 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
   @Input() conteudoHeader!: ConteudoHeader;
- 
-  FormConteudo = this.fb.group({
+
+  formConteudo = this.fb.group({
     codigo:  ['', Validators.required],
     nivelConteudo:['',Validators.required],
     conteudoPai:  [''], 
     titulo:  ['', Validators.required],
     posicao: ['', Validators.required],
-    conteudoDatalhes: this.fb.array([
-                      this.fb.group({
-                        texto:[]})])
-
-  
+    conteudoDatalhes: this.fb.array([this.fb.group({texto:['']})])  
   })
 
-  get getConteudoDatalhes(){
-     return this.FormConteudo.get("conteudoDatalhes") as FormArray 
+  get conteudoDatalhes(){
+     return this.formConteudo.get("conteudoDatalhes") as FormArray 
   }
 
   CriarElementoTexto(){
-    
-    this.HTMLDinamico.CriarElementoDetalheTipoTextArea();
-  }
-
-  CriarElementoImagem(){
-    this.HTMLDinamico.CriarComponenteInputImagem();
-    this.MapearInputImagemVazioFormGroup();
-  }
-
-  CreateInputeTextLinkYoutube(){
-    this.HTMLDinamico.CreateInputeTextLinkYoutube();
-  }
-  
-  MapearInputImagemVazioFormGroup(){
-    this.getConteudoDatalhes.push(
-      this.fb.group({
-      imagem:['', Validators.required]
-      })
-    );
-  }
-  MapearTextAreaTextoVazioFormGroup(){
-    this.getConteudoDatalhes.push(
+    this.conteudoDatalhes.push(
       this.fb.group({
         texto: ['', Validators.required]
       })
     )
   }
+  
+  CriarElementoImagem(){
+    this.conteudoDatalhes.push(
+      this.fb.group({
+      imagem:['', Validators.required]
+      })
+    );
+  }
+
+  CreateInputeTextLinkYoutube(){
+    this.HTMLDinamico.CreateInputeTextLinkYoutube();
+  }
+
+  TratarArquivoImagem(any:any){}
 
   GetConteudoById(codigoConteudo :string): ConteudoHeader{
     this.conteudoService.getConteudoById(codigoConteudo).subscribe({
@@ -94,19 +80,19 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   }
 
   TransferirObjetoEncontradoParaFormConteudo(){
-    this.FormConteudo.get('codigo')?.setValue(this.conteudoHeader.codigo)
-    this.FormConteudo.get('nivelConteudo')?.setValue(this.conteudoHeader.nivelConteudo)
-    this.FormConteudo.get('titulo')?.setValue(this.conteudoHeader.titulo)
-    this.FormConteudo.get('posicao')?.setValue(this.conteudoHeader.posicao)
+    this.formConteudo.get('codigo')?.setValue(this.conteudoHeader.codigo)
+    this.formConteudo.get('nivelConteudo')?.setValue(this.conteudoHeader.nivelConteudo)
+    this.formConteudo.get('titulo')?.setValue(this.conteudoHeader.titulo)
+    this.formConteudo.get('posicao')?.setValue(this.conteudoHeader.posicao)
     //this.conteudoHeader.conteudoDatalhes!.forEach( detalhe => this.AdicionarNovoDetalheComValor(detalhe))
   }
 
   TransferirFormConteudoParaObjeto(): ConteudoHeader{
     this.conteudoHeader = new ConteudoHeader();
-    this.conteudoHeader.codigo        = String(this.FormConteudo.get('codigo')?.value);
-    this.conteudoHeader.nivelConteudo = Number(this.FormConteudo.get('nivelConteudo')?.value);
-    this.conteudoHeader.titulo        = String(this.FormConteudo.get('titulo')?.value);
-    this.conteudoHeader.posicao       = Number(this.FormConteudo.get('posicao')?.value);
+    this.conteudoHeader.codigo        = String(this.formConteudo.get('codigo')?.value);
+    this.conteudoHeader.nivelConteudo = Number(this.formConteudo.get('nivelConteudo')?.value);
+    this.conteudoHeader.titulo        = String(this.formConteudo.get('titulo')?.value);
+    this.conteudoHeader.posicao       = Number(this.formConteudo.get('posicao')?.value);
     this.ConteudoHeaderEncontrado! == undefined ? this.conteudoHeader.conteudoPai = '' : this.conteudoHeader.conteudoPai = this.ConteudoHeaderEncontrado!.codigo;
     this.conteudoHeader.conteudoDatalhes = this.CriarListaDetalhe(this.conteudoHeader);
 
@@ -117,7 +103,7 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     var detalhe  = new ConteudoDatalhes();
     var listaDetalhes = new Array() ;
     
-    this.getConteudoDatalhes.getRawValue().forEach(function(_conteudo,indice) {
+    this.conteudoDatalhes.getRawValue().forEach(function(_conteudo,indice) {
       detalhe.codigo = conteudoHeader.codigo;
       detalhe.codigoHeader = conteudoHeader.codigo;
       detalhe.texto = _conteudo["texto"];
@@ -142,7 +128,6 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   }
 
   Salvar(){ 
-      console.log(this.FormConteudo)
        this.conteudoHeader = this.TransferirFormConteudoParaObjeto();
        this.louder.OpenLoader();
        this.conteudoService.saveConteudo(this.conteudoHeader).subscribe(      

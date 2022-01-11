@@ -6,28 +6,7 @@ import { Injectable } from "@angular/core";
     providedIn: 'root'
 })
 export class ElementoConteudoService{
-    
-    CriarElementoDetalheTipoTextArea(){
-        let AreaDeConteudo = document.getElementById("area-de-conteudo")
-        let div = this.CriarDivInputDetalhes();
-        div.appendChild(CriarTextArea());
-        AreaDeConteudo?.appendChild(div);
-       
-        function CriarTextArea():Node {
-          let TextArea = document.createElement("textarea");
-          TextArea.setAttribute("class","form-control");
-          TextArea.setAttribute("name","texto");
-          TextArea.setAttribute("formControlName","texto");
-          TextArea.setAttribute("style","height: 200px;");
-          return TextArea;
-        }
-      }
-      CriarDivInputDetalhes() :Node{
-        let  DivInputDetalhes = document.createElement("div");
-        DivInputDetalhes.setAttribute("class","mb-3 me-1 ms-1");
-        return DivInputDetalhes;
-    }
-    
+      
     CriarComponenteInputImagem(){
         let AreaDeConteudo = document.getElementById("area-de-conteudo")
         let div = this.CriarDivInputImagem();
@@ -103,7 +82,7 @@ export class ElementoConteudoService{
       CreateInputeTextLinkYoutube(){
         let AreaDeConteudo = document.getElementById("area-de-conteudo")
         let TexYoutube = document.createElement("input");
-        let div = this.CriarDivInputDetalhes();
+       
         
         TexYoutube.setAttribute("class","form-control");
         TexYoutube.setAttribute("type","text")
@@ -111,8 +90,6 @@ export class ElementoConteudoService{
         TexYoutube.setAttribute("formControlName","idvideoyoutube");
         TexYoutube.addEventListener("blur",this.ObterIdVideo);
         
-        div.appendChild(TexYoutube)
-        AreaDeConteudo?.appendChild(div);
       }
       ObterIdVideo(e:any){
         e.target.value = String(e.target.value).replace("https://www.youtube.com/watch?v=",'');

@@ -3,11 +3,11 @@
     <div class="mt-4 mb-5" >
         <div class="conteiner-conteudo">
         <div class="width-90pc">
-            <form  autocomplete="off"  [formGroup]="FormConteudo" *ngIf="conteudoHeader || !AlterarConteudo "id = "form-conteudo" class="pe-2 ps-2 border" >
+            <form  autocomplete="off"  [formGroup]="formConteudo" *ngIf="conteudoHeader || !AlterarConteudo "id = "form-conteudo" class="pe-2 ps-2 border" >
                 <div class="mb-3" *ngIf="!AlterarConteudo">
                     <label for="codigo" class="form-label">Codigo</label>
                     <input type="text"  class="form-control" formControlName='codigo' required>
-                    <div *ngIf="this.FormConteudo.get('codigo')!.errors?.['required']" >
+                    <div *ngIf="this.formConteudo.get('codigo')!.errors?.['required']" >
                         <div class="invalid-field-danger color-red mt-2">
                             Preenchimento do campo é obrigatório
                         </div>    
@@ -18,7 +18,7 @@
                     <select  class="form-select " formControlName="nivelConteudo" #NivelDoTitulo>
                         <option *ngFor="let item of ListNivelTituloConteudo" [value]="item.valor" >{{item.nivel}}</option>
                     </select>
-                    <div *ngIf="this.FormConteudo.get('nivelConteudo')!.errors?.['required']">
+                    <div *ngIf="this.formConteudo.get('nivelConteudo')!.errors?.['required']">
                         <div  class="invalid-field-danger color-red mt-1">
                             Preenchimento do campo é obrigatório
                         </div>    
@@ -38,7 +38,7 @@
                 <div class="mb-3">
                     <label for="Titulo" class="form-label">Titulo</label>
                     <input type="text"  class="form-control"  formControlName='titulo' required>
-                    <div *ngIf="this.FormConteudo.get('titulo')!.errors?.['required']">
+                    <div *ngIf="this.formConteudo.get('titulo')!.errors?.['required']">
                         <div class="invalid-field-danger color-red mt-1">
                             Preenchimento do campo é obrigatório
                         </div>    
@@ -47,7 +47,7 @@
                 <div class="mb-3">
                     <label for="Posicao" class="form-label">Posicao</label>
                     <input type="number" class="form-control" formControlName='posicao' required>
-                    <div *ngIf="this.FormConteudo.get('posicao')!.errors?.['required']">
+                    <div *ngIf="this.formConteudo.get('posicao')!.errors?.['required']">
                         <div class="invalid-field-danger color-red mt-1">
                             Preenchimento do campo  é obrigatório
                         </div>    
@@ -55,16 +55,22 @@
                 </div>
                 <div class="rounded mb-3">
                 <div formArrayName="conteudoDatalhes" class="detalhe-conteudo">
-                        <div *ngFor="let detalhe of getConteudoDatalhes.controls;let i=index" id="area-de-conteudo">
-                            <div [formGroupName]="i">
-                                
+                    <div *ngFor="let detalhe of conteudoDatalhes.controls;let i=index">
+                        <div [formGroupName]="i">
+                            <div class="mb-3">
+                                <div *ngIf="detalhe.value['texto'] != null">
+                                    <label for="texto" class="form-label">Texto {{i+1}}</label>
+                                    <textarea formControlName="texto" class="form-control"></textarea>
+                                </div>
+                                <div *ngIf="detalhe.value['imagem'] != null">
+                                    <label for="imagem" class="form-label">Imagem</label>
+                                    <input type="file" formControlName="imagem" class="form-control" [id]="'img-'+i" accept = "image/png, image/jpeg" (change) ="TratarArquivoImagem($event)">
+                                </div> 
                             </div>
                         </div>
+                    </div>
                 </div>
-                
-                
-
-                    <div class="mb-3">
+                <div class="mb-3">
                         <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto()" title="Adicionar area de texto"></i>
                         <i class="bi bi-images     btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoImagem()" title="Adicionar imagem ao conteudo"></i>
                         <i class="bi bi-youtube    btn-det-cont font-s-30 m-rigth-10 color-red" (click)="CreateInputeTextLinkYoutube()" title="Adicionar Id do Youtube" ></i>
@@ -88,5 +94,7 @@
     </div>
 <app-loader></app-loader>
 <pre>
-    {{FormConteudo.value | json}}
+    {{formConteudo.value | json}}
     </pre>
+
+   

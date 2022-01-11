@@ -35,3 +35,22 @@
     border-radius: 20px;        
   }
 
+
+  .desc-input{
+    display: flex ;
+    margin-top: 5px;
+}
+
+.desc-input-img{
+    max-width: 110px;
+    margin-right: 5px !important;
+    border-radius: 4px;
+}
+
+.desc-input-img-details{
+    display: flex;
+    border-radius:0px 5px 5px 0px  ;
+    width: 100%;
+    align-items: center;
+}
+

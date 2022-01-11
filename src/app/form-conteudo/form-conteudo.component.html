@@ -65,8 +65,24 @@
                                 <div *ngIf="detalhe.value['imagem'] != null">
                                     <label for="imagem" class="form-label">Imagem</label>
                                     <input type="file" formControlName="imagem" class="form-control" [id]="i" accept = "image/png, image/jpeg" (change) ="TratarArquivoImagem($event)" click>
-                                    <div id="'miniatura-img-'i" class = "desc-input">
+                                    <div id="'miniatura-img-'i" class = "desc-input border">
                                         <img [id]="'img-'+i" src="" class="desc-input-img" >
+                                        <div class="desc-input-img-details">
+                                            <table>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <td>{{descricaoImagem['nome']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Tamanho</th>
+                                                    <td>{{descricaoImagem['tamanho']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Ultima Atualização</th>
+                                                    <td>{{descricaoImagem['ultimaModificacao']}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div> 
                             </div>

@@ -1,4 +1,4 @@
-import {  AfterViewInit, Component, Input, OnInit } from "@angular/core";
+import {  AfterViewInit, Component, Input, OnInit, Output } from "@angular/core";
 import { FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { LoaderService } from "../shared/Loader/loader.service";
@@ -40,6 +40,12 @@ export class FormConteudoComponent implements OnInit{
     conteudoDatalhes: this.fb.array([this.fb.group({texto:['']})])  
   })
 
+  descricaoImagem = 
+  { nome:'',
+    tamanho:'',
+    ultimaModificacao:''
+  }
+
   get conteudoDatalhes(){
      return this.formConteudo.get("conteudoDatalhes") as FormArray 
   }
@@ -61,8 +67,15 @@ export class FormConteudoComponent implements OnInit{
   }
 
   TratarArquivoImagem(e:any){
+    let Imagem = e.target.files[0] as File
+
+    this.descricaoImagem['nome'] = Imagem.name
+    this.descricaoImagem['tamanho'] = Imagem.size.toString()
+    this.descricaoImagem['ultimaModificacao'] = Imagem.lastModified.toString()
+  
     let img =  document.getElementById("img-"+e.target.id)  as HTMLImageElement
-    img.src = URL.createObjectURL(e.target.files[0]);
+    img.src = URL.createObjectURL(Imagem);
+
   }
 
   GetConteudoById(codigoConteudo :string): ConteudoHeader{

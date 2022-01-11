@@ -45,8 +45,8 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     posicao: ['', Validators.required],
     conteudoDatalhes: this.fb.array([this.fb.group({texto:['',Validators.required]})])
   })
-  
-  get conteudoDatalhesForm():FormArray{
+
+  get conteudoDatalhes():FormArray{
      return this.FormConteudo.get('conteudoDatalhes') as FormArray 
   }
 
@@ -65,14 +65,14 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   }
   
   MapearInputImagemVazioFormGroup(){
-    this.conteudoDatalhesForm.push(
+    this.conteudoDatalhes.push(
       this.fb.group({
       imagem:['', Validators.required]
       })
     );
   }
   MapearTextAreaTextoVazioFormGroup(){
-    this.conteudoDatalhesForm.push(
+    this.conteudoDatalhes.push(
       this.fb.group({
         texto: ['', Validators.required]
       })
@@ -106,8 +106,6 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     this.ConteudoHeaderEncontrado! == undefined ? this.conteudoHeader.conteudoPai = '' : this.conteudoHeader.conteudoPai = this.ConteudoHeaderEncontrado!.codigo;
     this.conteudoHeader.conteudoDatalhes = this.CriarListaDetalhe(this.conteudoHeader);
 
-    console.log(this.FormConteudo)
-
     return this.conteudoHeader;
   }
 
@@ -115,7 +113,7 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     var detalhe  = new ConteudoDatalhes();
     var listaDetalhes = new Array() ;
     
-    this.conteudoDatalhesForm.getRawValue().forEach(function(_conteudo,indice) {
+    this.conteudoDatalhes.getRawValue().forEach(function(_conteudo,indice) {
       detalhe.codigo = conteudoHeader.codigo;
       detalhe.codigoHeader = conteudoHeader.codigo;
       detalhe.texto = _conteudo["texto"];
@@ -140,6 +138,7 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   }
 
   Salvar(){ 
+      console.log(this.FormConteudo)
        this.conteudoHeader = this.TransferirFormConteudoParaObjeto();
        this.louder.OpenLoader();
        this.conteudoService.saveConteudo(this.conteudoHeader).subscribe(      

@@ -43,15 +43,19 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     conteudoPai:  [''], 
     titulo:  ['', Validators.required],
     posicao: ['', Validators.required],
-    conteudoDatalhes: this.fb.array([this.fb.group({texto:['',Validators.required]})])
+    conteudoDatalhes: this.fb.array([
+                      this.fb.group({
+                        texto:[]})])
+
+  
   })
 
-  get conteudoDatalhes():FormArray{
-     return this.FormConteudo.get('conteudoDatalhes') as FormArray 
+  get getConteudoDatalhes(){
+     return this.FormConteudo.get("conteudoDatalhes") as FormArray 
   }
 
   CriarElementoTexto(){
-    this.MapearTextAreaTextoVazioFormGroup();
+    
     this.HTMLDinamico.CriarElementoDetalheTipoTextArea();
   }
 
@@ -65,18 +69,18 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
   }
   
   MapearInputImagemVazioFormGroup(){
-    this.conteudoDatalhes.push(
+    this.getConteudoDatalhes.push(
       this.fb.group({
       imagem:['', Validators.required]
       })
     );
   }
   MapearTextAreaTextoVazioFormGroup(){
-    this.conteudoDatalhes.push(
+    this.getConteudoDatalhes.push(
       this.fb.group({
         texto: ['', Validators.required]
       })
-    );
+    )
   }
 
   GetConteudoById(codigoConteudo :string): ConteudoHeader{
@@ -113,7 +117,7 @@ export class FormConteudoComponent implements OnInit,AfterViewInit{
     var detalhe  = new ConteudoDatalhes();
     var listaDetalhes = new Array() ;
     
-    this.conteudoDatalhes.getRawValue().forEach(function(_conteudo,indice) {
+    this.getConteudoDatalhes.getRawValue().forEach(function(_conteudo,indice) {
       detalhe.codigo = conteudoHeader.codigo;
       detalhe.codigoHeader = conteudoHeader.codigo;
       detalhe.texto = _conteudo["texto"];

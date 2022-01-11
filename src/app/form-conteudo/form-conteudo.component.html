@@ -55,12 +55,15 @@
                 </div>
                 <div class="rounded mb-3">
                 <div formArrayName="conteudoDatalhes" class="detalhe-conteudo">
-                        <div *ngFor="let detalhe of conteudoDatalhes.controls; index as posicao">
-                            <div [formGroupName]="posicao" id="area-de-conteudo" >
-
+                        <div *ngFor="let detalhe of getConteudoDatalhes.controls;let i=index" id="area-de-conteudo">
+                            <div [formGroupName]="i">
+                                
                             </div>
                         </div>
-                    </div>
+                </div>
+                
+                
+
                     <div class="mb-3">
                         <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto()" title="Adicionar area de texto"></i>
                         <i class="bi bi-images     btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoImagem()" title="Adicionar imagem ao conteudo"></i>

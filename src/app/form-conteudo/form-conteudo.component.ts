@@ -4,7 +4,6 @@ import { ActivatedRoute } from "@angular/router";
 import { LoaderService } from "../shared/Loader/loader.service";
 import { ConteudoDatalhes, ConteudoHeader } from "./conteudo-header";
 import { ConteudoService } from "./conteudo.service";
-import { ElementoConteudoService } from "./elemento-conteudo.service";
 @Component({
     templateUrl:'./form-conteudo.component.html',
     styleUrls:['./form-conteudo.component.css']
@@ -12,15 +11,13 @@ import { ElementoConteudoService } from "./elemento-conteudo.service";
 
 export class FormConteudoComponent implements OnInit{
 
-  constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService, private HTMLDinamico: ElementoConteudoService){  }
+  constructor(private conteudoService: ConteudoService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private louder: LoaderService){  }
   ngOnInit(){
-
       if (this.activatedRoute.snapshot.paramMap.get("codconteudo") != null){
           this.AlterarConteudo = true
           this.GetConteudoById(String(this.activatedRoute.snapshot.paramMap.get("codconteudo")))
       }
       this.CarregarEventosBtnCrud()
-      
   }
 
   CarregarEventosBtnCrud(){
@@ -64,11 +61,12 @@ export class FormConteudoComponent implements OnInit{
   }
 
   CreateInputeTextLinkYoutube(){
-    this.HTMLDinamico.CreateInputeTextLinkYoutube();
+   
   }
 
-  TratarArquivoImagem(any:any){
-    
+  TratarArquivoImagem(e:any){
+    let img =  document.getElementById("img-"+e.target.id)  as HTMLImageElement
+    img.src = URL.createObjectURL(e.target.files[0]);
   }
 
   GetConteudoById(codigoConteudo :string): ConteudoHeader{

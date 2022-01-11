@@ -57,14 +57,17 @@
                 <div formArrayName="conteudoDatalhes" class="detalhe-conteudo">
                     <div *ngFor="let detalhe of conteudoDatalhes.controls;let i=index">
                         <div [formGroupName]="i">
-                            <div class="mb-3">
+                            <div class="mb-3" [id]="'id-control-'+i">
                                 <div *ngIf="detalhe.value['texto'] != null">
                                     <label for="texto" class="form-label">Texto {{i+1}}</label>
                                     <textarea formControlName="texto" class="form-control"></textarea>
                                 </div>
                                 <div *ngIf="detalhe.value['imagem'] != null">
                                     <label for="imagem" class="form-label">Imagem</label>
-                                    <input type="file" formControlName="imagem" class="form-control" [id]="'img-'+i" accept = "image/png, image/jpeg" (change) ="TratarArquivoImagem($event)">
+                                    <input type="file" formControlName="imagem" class="form-control" [id]="i" accept = "image/png, image/jpeg" (change) ="TratarArquivoImagem($event)">
+                                    <div id="'miniatura-img-'i" class = "desc-input">
+                                        <img [id]="'img-'+i" src="" class="desc-input-img" >
+                                    </div>
                                 </div> 
                             </div>
                         </div>

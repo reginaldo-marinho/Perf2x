@@ -54,7 +54,7 @@ export class FormConteudoComponent implements OnInit{
       })
     )
   }
-  
+
   CriarElementoImagem(){
     this.conteudoDatalhes.push(
       this.fb.group({
@@ -67,7 +67,9 @@ export class FormConteudoComponent implements OnInit{
     this.HTMLDinamico.CreateInputeTextLinkYoutube();
   }
 
-  TratarArquivoImagem(any:any){}
+  TratarArquivoImagem(any:any){
+    
+  }
 
   GetConteudoById(codigoConteudo :string): ConteudoHeader{
     this.conteudoService.getConteudoById(codigoConteudo).subscribe({

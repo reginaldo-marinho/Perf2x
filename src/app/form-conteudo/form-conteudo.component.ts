@@ -60,10 +60,6 @@ export class FormConteudoComponent implements OnInit{
     );
   }
 
-  CreateInputeTextLinkYoutube(){
-   
-  }
-
   TratarArquivoImagem(e:any){
     let img =  document.getElementById("img-"+e.target.id)  as HTMLImageElement
     img.src = URL.createObjectURL(e.target.files[0]);

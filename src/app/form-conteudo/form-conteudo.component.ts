@@ -39,7 +39,6 @@ export class FormConteudoComponent implements OnInit{
     posicao: ['', Validators.required],
     conteudoDatalhes: this.fb.array([this.fb.group({texto:['']})])  
   })
-
   descricaoImagem = 
   { nome:'',
     tamanho:'',

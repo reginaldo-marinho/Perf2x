@@ -1,4 +1,3 @@
-import { Byte } from "@angular/compiler/src/util";
 
 export class ConteudoHeader{
 
@@ -21,3 +20,15 @@ export class ConteudoDatalhes{
     codigoHeader!:string;
     linha! :number;
 }
+
+export class DescricaoImagem{ 
+  nome!:string;
+  tamanho!:string;
+  ultimaModificacao!:string;
+}
+
+
+
+
+
+

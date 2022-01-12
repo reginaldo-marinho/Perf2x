@@ -35,15 +35,15 @@
     border-radius: 20px;        
   }
 
-
-  .desc-input{
+.desc-input{
     display: flex ;
     margin-top: 5px;
+    padding: 5px;
 }
 
 .desc-input-img{
-    max-width: 110px;
-    margin-right: 5px !important;
+    max-width: 120px;
+    margin-right: 10px;
     border-radius: 4px;
 }
 

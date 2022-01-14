@@ -1,4 +1,4 @@
-import {  AfterViewInit, Component, Input, OnInit, Output } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { LoaderService } from "../shared/Loader/loader.service";
@@ -39,11 +39,11 @@ export class FormConteudoComponent implements OnInit{
     posicao: ['', Validators.required],
     conteudoDatalhes: this.fb.array([this.fb.group({texto:['']})])  
   })
-  descricaoImagem = 
+  descricaoImagem  = [
   { nome:'',
     tamanho:'',
     ultimaModificacao:''
-  }
+  }]
 
   get conteudoDatalhes(){
      return this.formConteudo.get("conteudoDatalhes") as FormArray 
@@ -67,10 +67,9 @@ export class FormConteudoComponent implements OnInit{
 
   TratarArquivoImagem(e:any){
     let Imagem = e.target.files[0] as File
-
-    this.descricaoImagem['nome'] = Imagem.name
-    this.descricaoImagem['tamanho'] = Imagem.size.toString()
-    this.descricaoImagem['ultimaModificacao'] = Imagem.lastModified.toString()
+    this.descricaoImagem[0].nome = Imagem.name
+    this.descricaoImagem[0].tamanho = Imagem.size.toString()
+    this.descricaoImagem[0].ultimaModificacao = Imagem.lastModified.toString()
   
     let img =  document.getElementById("img-"+e.target.id)  as HTMLImageElement
     img.src = URL.createObjectURL(Imagem);

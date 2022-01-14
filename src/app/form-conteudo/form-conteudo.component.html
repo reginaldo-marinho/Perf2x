@@ -64,9 +64,9 @@
                                 </div>
                                 <div *ngIf="detalhe.value['imagem'] != null">
                                     <label for="imagem" class="form-label">Imagem</label>
-                                    <input type="file" formControlName="imagem" class="form-control" [id]="i" accept = "image/png, image/jpeg" (change) ="TratarArquivoImagem($event)" click>
+                                    <input type="file" formControlName="imagem" name="imagem" class="form-control" [id]="i" accept = "image/png, image/jpeg" (change) ="TratarArquivoImagem($event,i)" click>
                                     <div id="'miniatura-img-'i" class = "desc-input border">
-                                        <img [id]="'img-'+i" src="" class="desc-input-img" >
+                                        <img [id]="'img-'+i" src="" class="desc-input-img"  >
                                         <div class="desc-input-img-details">
                                             <table>
                                                 <tr>
@@ -113,8 +113,8 @@
     </div>
 <app-loader></app-loader>
 
-<!--
+
 <pre>
     {{formConteudo.value | json}}
 </pre>
--->  
+  

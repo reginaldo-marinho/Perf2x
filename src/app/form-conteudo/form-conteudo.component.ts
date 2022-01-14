@@ -65,15 +65,15 @@ export class FormConteudoComponent implements OnInit{
     );
   }
 
-  TratarArquivoImagem(e:any){
+  TratarArquivoImagem(e:any,indice:number){
     let Imagem = e.target.files[0] as File
+
     this.descricaoImagem[0].nome = Imagem.name
     this.descricaoImagem[0].tamanho = Imagem.size.toString()
     this.descricaoImagem[0].ultimaModificacao = Imagem.lastModified.toString()
   
     let img =  document.getElementById("img-"+e.target.id)  as HTMLImageElement
     img.src = URL.createObjectURL(Imagem);
-
   }
 
   GetConteudoById(codigoConteudo :string): ConteudoHeader{
@@ -114,6 +114,7 @@ export class FormConteudoComponent implements OnInit{
       detalhe.codigo = conteudoHeader.codigo;
       detalhe.codigoHeader = conteudoHeader.codigo;
       detalhe.texto = _conteudo["texto"];
+      detalhe.imagem= _conteudo["imagem"];
       detalhe.linha = indice+1
       listaDetalhes.push(detalhe )
     })

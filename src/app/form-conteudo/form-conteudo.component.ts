@@ -91,7 +91,6 @@ export class FormConteudoComponent implements OnInit{
     this.formConteudo.get('nivelConteudo')?.setValue(this.conteudoHeader.nivelConteudo)
     this.formConteudo.get('titulo')?.setValue(this.conteudoHeader.titulo)
     this.formConteudo.get('posicao')?.setValue(this.conteudoHeader.posicao)
-    //this.conteudoHeader.conteudoDatalhes!.forEach( detalhe => this.AdicionarNovoDetalheComValor(detalhe))
   }
 
   TransferirFormConteudoParaObjeto(): ConteudoHeader{

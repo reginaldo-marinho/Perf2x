@@ -1,7 +1,3 @@
-.conteiner-conteudo{
-    display: flex;
-    justify-content: space-between;
-}
 .closebtn{
     float: right;
     margin-left: 15px;

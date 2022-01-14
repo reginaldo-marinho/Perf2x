@@ -13,6 +13,7 @@ import { ListConteudoComponent } from './list-conteudo/list-conteudo.component';
     NavBarComponent,
     MenuBrazukasComponent,
     ListConteudoComponent,
+    
   ],
   imports: [
     ConteudoModule,

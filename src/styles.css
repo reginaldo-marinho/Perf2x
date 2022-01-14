@@ -95,3 +95,7 @@ body{
 .btn-vertical{
     max-width: 150px;
 }
+.conteiner-crud{
+    display: flex;
+    justify-content: space-between;
+}

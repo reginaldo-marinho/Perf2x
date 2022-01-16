@@ -7,6 +7,7 @@ export class ConteudoHeader{
     titulo! :string;
     posicao!:number;
     nivelConteudo!:number;
+    timestamp!:string;
     conteudoPai!:string;
     conteudoDatalhes!: ConteudoDatalhes[];
 }

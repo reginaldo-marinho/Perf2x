@@ -19,6 +19,7 @@ export class FormConteudoComponent implements OnInit{
       }
       this.CreateListConteudoHeader()
       this.CarregarEventosBtnCrud()
+      this.GetTimesTamp()
   }
 
   CarregarEventosBtnCrud(){
@@ -31,7 +32,7 @@ export class FormConteudoComponent implements OnInit{
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
   @Input() conteudoHeader!: ConteudoHeader;
-  Timestam!:string;
+  Timestamp!:string;
 
   formConteudo = this.fb.group({
     codigo:  ['', Validators.required],
@@ -101,6 +102,7 @@ export class FormConteudoComponent implements OnInit{
     this.conteudoHeader.nivelConteudo = Number(this.formConteudo.get('nivelConteudo')?.value);
     this.conteudoHeader.titulo        = String(this.formConteudo.get('titulo')?.value);
     this.conteudoHeader.posicao       = Number(this.formConteudo.get('posicao')?.value);
+    this.conteudoHeader.timestamp = this.Timestamp;
     this.ConteudoHeaderEncontrado! == undefined ? this.conteudoHeader.conteudoPai = '' : this.conteudoHeader.conteudoPai = this.ConteudoHeaderEncontrado!.codigo;
     this.conteudoHeader.conteudoDatalhes = this.CriarListaDetalhe(this.conteudoHeader);
 
@@ -116,6 +118,14 @@ export class FormConteudoComponent implements OnInit{
      detalhe.push(_conteudo);
     })
     return  detalhe!;
+  }
+
+  GetTimesTamp(){
+    this.conteudoService.getTimestamp().subscribe({
+      next: (timestamp) =>  {
+        this.Timestamp = timestamp
+      }
+    })
   }
 
   GetConteudoPai(event?:any){

@@ -32,6 +32,9 @@ export class ConteudoService{
     getConteudoHeader():Observable<ConteudoHeader[]> {
         return this.http.get<ConteudoHeader[]>(`${this.configUrl}/conteudoHeader/`);
     }
+    getTimestamp():Observable<string> {
+        return this.http.get<string>(`${this.configUrl}/timestamp` );
+    }
     saveConteudo(coteudo: ConteudoHeader ): Observable<ConteudoHeader>{
         return this.http.post<ConteudoHeader>(this.configUrl,coteudo);
     }

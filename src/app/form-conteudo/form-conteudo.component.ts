@@ -17,6 +17,7 @@ export class FormConteudoComponent implements OnInit{
           this.AlterarConteudo = true
           this.GetConteudoById(String(this.activatedRoute.snapshot.paramMap.get("codconteudo")))
       }
+      this.CreateListConteudoHeader()
       this.CarregarEventosBtnCrud()
   }
 
@@ -30,6 +31,7 @@ export class FormConteudoComponent implements OnInit{
   ConteudoHeaderEncontrado?: ConteudoHeader;
   TextoParaFiltrar!: string;
   @Input() conteudoHeader!: ConteudoHeader;
+  Timestam!:string;
 
   formConteudo = this.fb.group({
     codigo:  ['', Validators.required],
@@ -105,19 +107,15 @@ export class FormConteudoComponent implements OnInit{
     return this.conteudoHeader;
   }
 
-  CriarListaDetalhe(conteudoHeader:ConteudoHeader):ConteudoDatalhes[]{
-    var detalhe  = new ConteudoDatalhes();
-    var listaDetalhes = new Array() ;
-    
+  CriarListaDetalhe(conteudoHeader:ConteudoHeader):Array<ConteudoDatalhes>{
+    var detalhe = new  Array();
     this.conteudoDatalhes.getRawValue().forEach(function(_conteudo,indice) {
-      detalhe.codigo = conteudoHeader.codigo;
-      detalhe.codigoHeader = conteudoHeader.codigo;
-      detalhe.texto = _conteudo["texto"];
-      detalhe.imagem= _conteudo["imagem"];
-      detalhe.linha = indice+1
-      listaDetalhes.push(detalhe )
+      _conteudo.codigo = conteudoHeader.codigo;
+      _conteudo.codigoHeader = conteudoHeader.codigo;
+      _conteudo.linha = indice+1
+     detalhe.push(_conteudo);
     })
-    return  listaDetalhes;
+    return  detalhe!;
   }
 
   GetConteudoPai(event?:any){

@@ -19,7 +19,6 @@ export class FormConteudoComponent implements OnInit{
       }
       this.CreateListConteudoHeader()
       this.CarregarEventosBtnCrud()
-      this.GetTimesTamp()
   }
 
   CarregarEventosBtnCrud(){
@@ -146,8 +145,9 @@ export class FormConteudoComponent implements OnInit{
   }
 
   Salvar(){ 
+       this.GetTimesTamp()
        this.conteudoHeader = this.TransferirFormConteudoParaObjeto();
-       this.louder.OpenLoader();
+      // this.louder.OpenLoader();
        this.conteudoService.saveConteudo(this.conteudoHeader).subscribe(      
         {
           next:() => {
@@ -156,7 +156,7 @@ export class FormConteudoComponent implements OnInit{
           }
         })
         this.Upload();
-        this.louder.CloseLoader();
+      //  this.louder.CloseLoader();
   }
 
     update(conteudo:any){

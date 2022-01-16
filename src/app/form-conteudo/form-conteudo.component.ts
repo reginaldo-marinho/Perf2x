@@ -102,8 +102,9 @@ export class FormConteudoComponent implements OnInit{
     this.conteudoHeader.nivelConteudo = Number(this.formConteudo.get('nivelConteudo')?.value);
     this.conteudoHeader.titulo        = String(this.formConteudo.get('titulo')?.value);
     this.conteudoHeader.posicao       = Number(this.formConteudo.get('posicao')?.value);
-    this.conteudoHeader.timestamp = this.Timestamp;
     this.ConteudoHeaderEncontrado! == undefined ? this.conteudoHeader.conteudoPai = '' : this.conteudoHeader.conteudoPai = this.ConteudoHeaderEncontrado!.codigo;
+    this.conteudoHeader.titulo        = String(this.formConteudo.get('titulo')?.value);
+    this.conteudoHeader.timestamp     = String(this.Timestamp);
     this.conteudoHeader.conteudoDatalhes = this.CriarListaDetalhe(this.conteudoHeader);
 
     return this.conteudoHeader;
@@ -111,9 +112,11 @@ export class FormConteudoComponent implements OnInit{
 
   CriarListaDetalhe(conteudoHeader:ConteudoHeader):Array<ConteudoDatalhes>{
     var detalhe = new  Array();
+    var timestamp = this.Timestamp;
     this.conteudoDatalhes.getRawValue().forEach(function(_conteudo,indice) {
       _conteudo.codigo = conteudoHeader.codigo;
       _conteudo.codigoHeader = conteudoHeader.codigo;
+      if(_conteudo["imagem"]) _conteudo["imagem"] =timestamp+"_"+String(_conteudo["imagem"]).replace("C:\\fakepath\\","");
       _conteudo.linha = indice+1
      detalhe.push(_conteudo);
     })
@@ -184,7 +187,13 @@ export class FormConteudoComponent implements OnInit{
         (imagem) => {
           let img = imagem as HTMLInputElement
           let file = img.files?.item(0) as File
-          this.conteudoService.uploadImagem(file);
+          const frmData:FormData = new FormData();
+          frmData.append("imagem",file,this.CriarIdentificadorDeImagem(file.name)); 
+          this.conteudoService.uploadImagem(frmData);
       })
     }
+
+  CriarIdentificadorDeImagem(value:string):string{
+      return this.Timestamp+"_"+value.replace("C:\\fakepath\\","")
+  }
 }

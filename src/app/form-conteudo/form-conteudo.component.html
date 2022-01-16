@@ -60,7 +60,11 @@
                             <div class="mb-3" [id]="'id-control-'+i">
                                 <div *ngIf="detalhe.value['texto'] != null">
                                     <label for="texto" class="form-label">Texto {{i+1}}</label>
-                                    <textarea formControlName="texto" class="form-control text-conteudo" (mouseup)="GetTextoEmFoco()"></textarea>
+                                    <textarea formControlName="texto" class="form-control text-conteudo" [id]="'texto'+i" (mouseup)="GetTextoEmFoco()"></textarea>
+                                </div>
+                                <div *ngIf="detalhe.value['youtube'] != null">
+                                    <label for="youtube" class="form-label">Link Youtube:</label>
+                                    <input formControlName="youtube" class="form-control" >
                                 </div>
                                 <div *ngIf="detalhe.value['imagem'] != null">
                                     <label for="imagem" class="form-label">Imagem</label>
@@ -93,7 +97,7 @@
                 <div class="mb-3">
                         <i class="bi bi-textarea-t btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoTexto()" title="Adicionar area de texto"></i>
                         <i class="bi bi-images     btn-det-cont font-s-30 m-rigth-10" (click)="CriarElementoImagem()" title="Adicionar imagem ao conteudo"></i>
-                        <i class="bi bi-youtube    btn-det-cont font-s-30 m-rigth-10 color-red" title="Adicionar Id do Youtube" ></i>
+                        <i class="bi bi-youtube    btn-det-cont font-s-30 m-rigth-10 color-red" (click)="CriarElementoYoutube()" title="Adicionar Id do Youtube" ></i>
                         <i class="bi bi-type-bold  btn-det-cont font-s-30"   (click)= "FormatarNegrito()" title="Transformar Texto em negrito"></i>
                         <i class="bi bi-link-45deg btn-det-cont font-s-30 m-rigth-10"></i>
                     </div>

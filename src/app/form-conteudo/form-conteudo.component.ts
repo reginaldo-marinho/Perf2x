@@ -67,6 +67,14 @@ export class FormConteudoComponent implements OnInit{
     );
   }
 
+  CriarElementoYoutube(){
+    this.conteudoDatalhes.push(
+      this.fb.group({
+      youtube:['', Validators.required]
+      })
+    );
+  }
+
   TratarArquivoImagem(e:any,indice:number){
     let Imagem = e.target.files[0] as File
 
@@ -198,11 +206,7 @@ export class FormConteudoComponent implements OnInit{
   }
 
   GetTextoEmFoco(){
-    function get (){
-      var selectedTextArea = document.activeElement;
-      
-    }
-  
+    this.TextoSelecionado! = String(window.getSelection)
   }
 
   FormatarNegrito(){

@@ -24,7 +24,7 @@ export class FormConteudoComponent implements OnInit{
   CarregarEventosBtnCrud(){
     document.getElementById("btn-adicionar")?.addEventListener("click",() => this.Salvar());
   }
-
+  TextoSelecionado!: string; 
   AlterarConteudo   : boolean = false;
   ListNivelTituloConteudo = this.conteudoService.NivelTituloConteudo;
   ListConteudoHeader!: ConteudoHeader[];
@@ -195,5 +195,17 @@ export class FormConteudoComponent implements OnInit{
 
   CriarIdentificadorDeImagem(value:string):string{
       return this.Timestamp+"_"+value.replace("C:\\fakepath\\","")
+  }
+
+  GetTextoEmFoco(){
+    function get (){
+      var selectedTextArea = document.activeElement;
+      
+    }
+  
+  }
+
+  FormatarNegrito(){
+    console.log(this.TextoSelecionado)
   }
 }

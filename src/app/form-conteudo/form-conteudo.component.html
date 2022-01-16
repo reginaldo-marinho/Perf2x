@@ -60,7 +60,7 @@
                             <div class="mb-3" [id]="'id-control-'+i">
                                 <div *ngIf="detalhe.value['texto'] != null">
                                     <label for="texto" class="form-label">Texto {{i+1}}</label>
-                                    <textarea formControlName="texto" class="form-control"></textarea>
+                                    <textarea formControlName="texto" class="form-control text-conteudo"></textarea>
                                 </div>
                                 <div *ngIf="detalhe.value['imagem'] != null">
                                     <label for="imagem" class="form-label">Imagem</label>

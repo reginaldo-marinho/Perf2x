@@ -10,15 +10,14 @@ import { MensagemBoxComponent } from "../shared/mensagem-box/mensagem-box.compon
 import { LoaderComponent } from "../shared/Loader/loader.component";
 import { BotoesCrudComponent } from "../core/botoes-crud/botoes-crud.component";
 
-
 @NgModule({
     imports:[
         CommonModule,
         AppRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        HttpClientModule,
-    ],
+        HttpClientModule
+        ],
     declarations:[
         FormConteudoComponent,
         LoaderComponent,

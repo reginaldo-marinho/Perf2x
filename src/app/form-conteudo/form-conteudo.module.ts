@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormConteudoComponent } from "./form-conteudo.component";
 import { MensagemBoxComponent } from "../shared/mensagem-box/mensagem-box.component";
 import { LoaderComponent } from "../shared/Loader/loader.component";
-import { BotoesCrudComponent } from "../core/botoes-crud/botoes-crud.component";
+import { BotoesCrudModule } from "../core/botoes-crud/botoes-crud.module";
 
 @NgModule({
     imports:[
@@ -16,13 +16,14 @@ import { BotoesCrudComponent } from "../core/botoes-crud/botoes-crud.component";
         AppRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        BotoesCrudModule
         ],
     declarations:[
+        
         FormConteudoComponent,
         LoaderComponent,
         MensagemBoxComponent,
-        BotoesCrudComponent
     ],
     exports:[FormConteudoComponent] 
 })

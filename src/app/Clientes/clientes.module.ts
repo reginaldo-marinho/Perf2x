@@ -2,15 +2,18 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { ClienteComponent } from "./clientes.component";
-import { BotoesCrudComponent } from "../core/botoes-crud/botoes-crud.component";
+import { BotoesCrudModule } from "../core/botoes-crud/botoes-crud.module";
+
+
+
 @NgModule({
     imports:[
         CommonModule,
+        BotoesCrudModule
         ],
     declarations:[
-        ClienteComponent,
-        BotoesCrudComponent
+        ClienteComponent
     ],
     exports:[ClienteComponent] 
 })
-export class ClienteModule {}
+export class ClientesModule {}

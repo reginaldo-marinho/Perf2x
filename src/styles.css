@@ -99,3 +99,13 @@ body{
     display: flex;
     justify-content: space-between;
 }
+
+
+.field-form
+{
+    display: block;
+    border: 0.5px solid rgb(207, 206, 206);
+    border-radius: 5px;
+    padding: 3px;
+    
+}

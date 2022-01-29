@@ -25,6 +25,5 @@ import { BotoesCrudComponent } from "../core/botoes-crud/botoes-crud.component";
         BotoesCrudComponent
     ],
     exports:[FormConteudoComponent] 
-
 })
 export class ConteudoModule {}

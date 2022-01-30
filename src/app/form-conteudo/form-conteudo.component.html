@@ -21,7 +21,7 @@
                 </div>
                 <div *ngIf="NivelDoTitulo.value > '1'">
                     <div class="form-div-group">
-                        <label for="tipo">Conteudo Pai</label>
+                        <label for="tipo" class="form-label">Conteudo Pai</label>
                         <input type="text"  (keyup)="GetConteudoPai($event)" class="field-form" formControlName="conteudoPai">
                     </div>
                     <div class="form-div-group">
@@ -39,14 +39,14 @@
                     <input type="number" class="field-form wd-200" formControlName='posicao' required>
                 </div>
                </div>
-                <div class="rounded mb-3 detalhe-conteudo">
+                <div class="rounded mb-3 -conteudo">
                 <div formArrayName="conteudoDatalhes" class="detalhe-conteudo">
                     <div *ngFor="let detalhe of conteudoDatalhes.controls;let i=index">
                         <div [formGroupName]="i">
                             <div class="form-div-group" [id]="'id-control-'+i">
                                 <div *ngIf="detalhe.value['texto'] != null">
                                     <label for="texto" class="form-label">Texto {{i+1}}</label>
-                                    <textarea formControlName="texto" class="field-form wd-full" [id]="'texto'+i" (mouseup)="GetTextoEmFoco()"></textarea>
+                                    <textarea formControlName="texto" class="field-form text-conteudo wd-full " [id]="'texto'+i" (mouseup)="GetTextoEmFoco()"></textarea>
                                 </div>
                                 <div *ngIf="detalhe.value['youtube'] != null">
                                     <label for="youtube" class="form-label">Link Youtube:</label>

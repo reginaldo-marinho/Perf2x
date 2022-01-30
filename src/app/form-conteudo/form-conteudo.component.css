@@ -39,8 +39,7 @@
 }
 
 .text-conteudo{
-    height:140px;
-    width: 100px;
+    min-height:100px !important ;
 }
 
 .form-div-flex{

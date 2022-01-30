@@ -67,11 +67,8 @@ body{
     padding: 3px;
     transition: border-color ease-in-out 100ms, box-shadow ease-in-out 250ms;
     outline: none;
-    height: 32px !important;
+    height: 32px;
 }
-
-
-
 .field-form:focus{
     box-shadow: var(--cor-azul-shadowbox) 0px 0px 0px 5px;
     border-color: var(--cor-azul-shadowbox);

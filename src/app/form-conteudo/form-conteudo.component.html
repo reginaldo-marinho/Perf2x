@@ -14,8 +14,8 @@
                     <input type="text"  class="field-form wd-200"  formControlName='codigo' required>
                 </div>
                 <div class="form-div-group">
-                    <label for="tipo">Tipo do Conteudo</label>
-                    <select  class="field-form " formControlName="nivelConteudo" #NivelDoTitulo>
+                    <label for="tipo" class="form-label">Tipo do Conteudo</label>
+                    <select  class="field-form wd-200" formControlName="nivelConteudo" #NivelDoTitulo>
                         <option *ngFor="let item of ListNivelTituloConteudo" [value]="item.valor" >{{item.nivel}}</option>
                     </select>
                 </div>
@@ -46,15 +46,15 @@
                             <div class="form-div-group" [id]="'id-control-'+i">
                                 <div *ngIf="detalhe.value['texto'] != null">
                                     <label for="texto" class="form-label">Texto {{i+1}}</label>
-                                    <textarea formControlName="texto" class="field-form text-conteudo" [id]="'texto'+i" (mouseup)="GetTextoEmFoco()"></textarea>
+                                    <textarea formControlName="texto" class="field-form wd-full" [id]="'texto'+i" (mouseup)="GetTextoEmFoco()"></textarea>
                                 </div>
                                 <div *ngIf="detalhe.value['youtube'] != null">
                                     <label for="youtube" class="form-label">Link Youtube:</label>
-                                    <input formControlName="youtube" class="field-form" >
+                                    <input formControlName="youtube" class="field-form wd-full" >
                                 </div>
                                 <div *ngIf="detalhe.value['imagem'] != null">
                                     <label for="imagem" class="form-label">Imagem</label>
-                                    <input type="file" formControlName="imagem" name="imagem" class="field-form" [id]="i" accept = "image/png, image/jpeg" (change) ="TratarArquivoImagem($event,i)" click>
+                                    <input type="file" formControlName="imagem" name="imagem" class="field-form wd-full" [id]="i" accept = "image/png, image/jpeg" (change) ="TratarArquivoImagem($event,i)" click>
                                     <div id="'miniatura-img-'i" class = "desc-input border">
                                         <img [id]="'img-'+i" src="" class="desc-input-img"  >
                                         <div class="desc-input-img-details">

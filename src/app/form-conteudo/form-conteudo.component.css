@@ -1,31 +1,16 @@
-.closebtn{
-    float: right;
-    margin-left: 15px;
-    margin-right: 15px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.btn-det-cont:hover{
-    color: #2241cc;
-    cursor: pointer;
-}
 .m-rigth-10{
     margin-right: 10px;
 }
 .m-left-10{
     margin-left: 10px;
 }
-
-
 .auto-ajuste{
     width: -webkit-fill-available;
 }
-
 .detalhe-conteudo{
     overflow-y: scroll;
     max-height: 500px;
 }
-
 .detalhe-conteudo::-webkit-scrollbar{
     width: 10px;
 }
@@ -55,6 +40,7 @@
 
 .text-conteudo{
     height:140px;
+    width: 100px;
 }
 
 .form-div-flex{
@@ -64,9 +50,5 @@
 
 .form-div-group{
     margin:5px 5px 5px 5px;
-}
-
-.detalhe-conteudo{
-    display: block;
 }
 

@@ -59,7 +59,7 @@ body{
     margin-right: 10px;
 }
 
-.field-form
+.field-form,.select-field-form
 {
     display: block;
     border: 0.5px solid rgb(207, 206, 206);
@@ -67,7 +67,11 @@ body{
     padding: 3px;
     transition: border-color ease-in-out 100ms, box-shadow ease-in-out 250ms;
     outline: none;
+    height: 32px !important;
 }
+
+
+
 .field-form:focus{
     box-shadow: var(--cor-azul-shadowbox) 0px 0px 0px 5px;
     border-color: var(--cor-azul-shadowbox);
@@ -79,7 +83,6 @@ body{
 .wd-800{
     width: 800px !important;
 }
-
-.wdpc-10{
+.wd-full{
     width: 100%;
 }

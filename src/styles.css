@@ -54,6 +54,11 @@ body{
     justify-content: space-between;
 }
 
+.left-list{
+    width: 300px;
+    margin-right: 10px;
+}
+
 .field-form
 {
     display: block;
@@ -68,7 +73,13 @@ body{
     border-color: var(--cor-azul-shadowbox);
 }
 
-.left-list{
-    width: 300px;
-    margin-right: 10px;
+.wd-200{
+    width: 200px;
+}
+.wd-800{
+    width: 800px !important;
+}
+
+.wdpc-10{
+    width: 100%;
 }

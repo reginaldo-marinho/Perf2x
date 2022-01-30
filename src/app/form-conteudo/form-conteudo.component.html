@@ -7,41 +7,43 @@
                 
             </div>
         <div class="auto-ajuste">
-            <form  autocomplete="off"  [formGroup]="formConteudo" *ngIf="conteudoHeader || !AlterarConteudo "id = "form-conteudo" class="pe-2 ps-2 border" >
-                <div class="mb-3" *ngIf="!AlterarConteudo">
+            <form  autocomplete="off"  [formGroup]="formConteudo" *ngIf="conteudoHeader || !AlterarConteudo " id="form-conteudo" class="pe-2 ps-2 border" >
+               <div class="form-div-flex">
+                <div class="form-div-group" *ngIf="!AlterarConteudo">
                     <label for="codigo" class="form-label">Codigo</label>
-                    <input type="text"  class="field-form"  formControlName='codigo' required>
+                    <input type="text"  class="field-form wd-200"  formControlName='codigo' required>
                 </div>
-                <div class="mb-3">
+                <div class="form-div-group">
                     <label for="tipo">Tipo do Conteudo</label>
                     <select  class="field-form " formControlName="nivelConteudo" #NivelDoTitulo>
                         <option *ngFor="let item of ListNivelTituloConteudo" [value]="item.valor" >{{item.nivel}}</option>
                     </select>
                 </div>
                 <div *ngIf="NivelDoTitulo.value > '1'">
-                    <div class="mb-3">
+                    <div class="form-div-group">
                         <label for="tipo">Conteudo Pai</label>
                         <input type="text"  (keyup)="GetConteudoPai($event)" class="field-form" formControlName="conteudoPai">
                     </div>
-                    <div class="mb-3">
+                    <div class="form-div-group">
                         <label for="">Conteudo Encontrado: </label>
                         <strong>{{ConteudoHeaderEncontrado?.titulo}}</strong>
                     </div>    
                 </div>
 
-                <div class="mb-3">
+                <div class="form-div-group">
                     <label for="Titulo" class="form-label">Titulo</label>
-                    <input type="text"  class="field-form"  formControlName='titulo' required>
+                    <input type="text"  class="field-form wd-800"  formControlName='titulo' required>
                 </div>
-                <div class="mb-3">
+                <div class="form-div-group">
                     <label for="Posicao" class="form-label">Posicao</label>
-                    <input type="number" class="field-form" formControlName='posicao' required>
+                    <input type="number" class="field-form wd-200" formControlName='posicao' required>
                 </div>
-                <div class="rounded mb-3">
+               </div>
+                <div class="rounded mb-3 detalhe-conteudo">
                 <div formArrayName="conteudoDatalhes" class="detalhe-conteudo">
                     <div *ngFor="let detalhe of conteudoDatalhes.controls;let i=index">
                         <div [formGroupName]="i">
-                            <div class="mb-3" [id]="'id-control-'+i">
+                            <div class="form-div-group" [id]="'id-control-'+i">
                                 <div *ngIf="detalhe.value['texto'] != null">
                                     <label for="texto" class="form-label">Texto {{i+1}}</label>
                                     <textarea formControlName="texto" class="field-form text-conteudo" [id]="'texto'+i" (mouseup)="GetTextoEmFoco()"></textarea>

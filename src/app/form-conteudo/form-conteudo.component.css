@@ -56,3 +56,17 @@
 .text-conteudo{
     height:140px;
 }
+
+.form-div-flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-div-group{
+    margin:5px 5px 5px 5px;
+}
+
+.detalhe-conteudo{
+    display: block;
+}
+

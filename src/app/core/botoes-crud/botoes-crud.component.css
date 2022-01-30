@@ -1,0 +1,25 @@
+.btn-vertical{
+    max-width: 150px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.button-anymate{
+    display: block !important;
+    background-color: #9de4fa;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    box-shadow: 2px 5px #bdbdbd ;
+    min-width: 150px;
+    margin-bottom: 10px;    
+  }
+  .button-anymate:active{
+    transform: translateY(3px);
+    box-shadow: 2px 3px #a3a3a3 ;
+  }
+
+  .button-anymate:hover{
+   background-color: #64d3f5;
+  }
+  

@@ -38,26 +38,6 @@ body{
 .color-red{
     color: rgba(255, 0, 0, 0.651) !important;
 }
-
-.button-anymate{
-    display: block !important;
-    background-color: #9de4fa;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    box-shadow: 2px 5px #bdbdbd ;
-    min-width: 150px;
-    margin: 0px 0px 10px 0px;
-  }
-  .button-anymate:active{
-    transform: translateY(3px);
-    box-shadow: 2px 3px #a3a3a3 ;
-  }
-
-  .button-anymate:hover{
-   background-color: #64d3f5;
-  }
-  
   .color-red{
       color: var(--cor-vermelho-padrao);
   }
@@ -68,10 +48,6 @@ body{
 
 .container-main{
     margin: 10px;
-}
-
-.btn-vertical{
-    max-width: 150px;
 }
 .conteiner-crud{
     display: flex;
@@ -94,5 +70,5 @@ body{
 
 .left-list{
     width: 300px;
-    background-color: violet;
+    margin-right: 10px;
 }

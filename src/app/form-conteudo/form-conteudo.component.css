@@ -5,13 +5,10 @@
     font-weight: bold;
     cursor: pointer;
 }
-
 .btn-det-cont:hover{
     color: #2241cc;
     cursor: pointer;
 }
-
-
 .m-rigth-10{
     margin-right: 10px;
 }
@@ -20,8 +17,8 @@
 }
 
 
-.width-90pc{
-    width: 90% ;
+.auto-ajuste{
+    width: -webkit-fill-available;
 }
 
 .detalhe-conteudo{

@@ -13,6 +13,12 @@
 body::-webkit-scrollbar{
     width: 10px;
 }
+footer{
+    display: block;
+    background-color: var(--cor-azul-defaut-1);
+    height: 50px;
+    margin-bottom: 0px;
+}
 body::-webkit-scrollbar-thumb {
     background-color: #cacaca; 
     border-radius: 10px;         

@@ -1,12 +1,13 @@
-
 <message-box></message-box> 
-    <h1 class="text-center mt-4">Criando uma Nova História </h1>
     <div class="mt-4 mb-5" >
         <div class="conteiner-crud">
             <div class="left-list">
                 
             </div>
         <div class="auto-ajuste">
+            <div class="title-h2">
+                <h2 class="text-center">Gereciador de Hístorias</h2>
+            </div>
             <form  autocomplete="off"  [formGroup]="formConteudo" *ngIf="conteudoHeader || !AlterarConteudo " id="form-conteudo" class="pe-2 ps-2 border" >
                <div class="form-div-flex">
                 <div class="form-div-group" *ngIf="!AlterarConteudo">

@@ -6,7 +6,7 @@
 :root{
     --cor-azul-form-clarinha: #edf8fb;
     --cor-vermelho-padrao: #f00;
-    --cor-azul-shadowbox: #c9f3ff;
+    --cor-azul-shadowbox: #00c3ff;
 }
 body::-webkit-scrollbar{
     width: 10px;
@@ -70,7 +70,7 @@ body{
     height: 32px;
 }
 .field-form:focus{
-    box-shadow: var(--cor-azul-shadowbox) 0px 0px 0px 5px;
+    box-shadow: var(--cor-azul-shadowbox) 0px 0px 0px 4px;
     border-color: var(--cor-azul-shadowbox);
 }
 
@@ -82,4 +82,10 @@ body{
 }
 .wd-full{
     width: 100%;
+}
+
+.title-h2{
+    background-color: #00c3ff;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

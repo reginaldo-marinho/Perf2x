@@ -104,8 +104,8 @@ body{
 }
 
 .field-form:focus{
-    box-shadow: var(--cor-azul-shadowbox) 0px 0px 0px 4px;
-    border-color: var(--cor-azul-shadowbox);
+    box-shadow: #d5f5ff 0px 0px 0px 4px;
+    border-color: var(--cor-cinza-bordas);
 }
 
 .wd-200{

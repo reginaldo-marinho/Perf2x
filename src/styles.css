@@ -7,6 +7,8 @@
     --cor-azul-form-clarinha: #edf8fb;
     --cor-vermelho-padrao: #f00;
     --cor-azul-shadowbox: #00c3ff;
+    --cor-cinza-bordas: rgb(207, 206, 206);
+    --cor-azul-defaut-1: #9de4fa;
 }
 body::-webkit-scrollbar{
     width: 10px;
@@ -54,21 +56,47 @@ body{
     justify-content: space-between;
 }
 
+.left-list::-webkit-scrollbar{
+    height: 7px;
+    width: 7px;
+}
+.left-list::-webkit-scrollbar-thumb {
+    background-color: #cacaca; 
+    border-radius: 10px;         
+}
+
 .left-list{
-    width: 300px;
+    width: 400px;
     margin-right: 10px;
+    overflow: scroll;
+    max-height: 600px;
+}
+.left-list > table{
+    border: 1px solid var(--cor-cinza-bordas);
+}
+
+.left-list > table th, table td{
+    border: 1px solid var(--cor-cinza-bordas);
+    cursor: pointer;
+    padding: 2px;
+    white-space:nowrap;
+}
+
+.left-list > table tr:nth-child(even) {
+    background-color: var(--cor-azul-defaut-1);
 }
 
 .field-form,.select-field-form
 {
     display: block;
-    border: 0.5px solid rgb(207, 206, 206);
+    border: 0.5px solid var(--cor-cinza-bordas);
     border-radius: 5px;
     padding: 3px;
     transition: border-color ease-in-out 100ms, box-shadow ease-in-out 250ms;
     outline: none;
     height: 32px;
 }
+
 .field-form:focus{
     box-shadow: var(--cor-azul-shadowbox) 0px 0px 0px 4px;
     border-color: var(--cor-azul-shadowbox);

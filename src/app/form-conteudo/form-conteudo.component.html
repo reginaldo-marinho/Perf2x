@@ -2,7 +2,24 @@
     <div class="mt-4 mb-5" >
         <div class="conteiner-crud">
             <div class="left-list">
-                
+                <table>
+                    <tr>
+                        <th>Código</th>
+                        <th>Titulo</th>
+                        <th>Nível</th>
+                    </tr>
+                    <tr *ngFor="let item of ListConteudoHeader ">
+                        <td>
+                            {{item.codigo}}
+                        </td>
+                        <td>
+                            {{item.titulo}}
+                        </td>
+                        <td>
+                            {{item.nivelConteudo}}
+                        </td>
+                    </tr>
+                </table>
             </div>
         <div class="auto-ajuste">
             <div class="title-h2">
